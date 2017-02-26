@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		window.onload = function() {
+			var text = document.getElementById("text");
+			var menu = document.getElementById("menu");
+			document.oncontextmenu=function(){return false;}
+			text.oncontextmenu = function(e) {
+				e=e? e:window.event;
+				var flag;
+				if(e.pageX+127>document.body.clientWidth){
+					flag="left-";
+				}else{
+					flag="right-"
+				}
+				if(e.pageY+97>document.body.clientHeight){
+					flag+="up";
+				}else{
+					flag+="down";
+				}
+				var ex=parseInt(e.pageX),ey=parseInt(e.pageY),left=0,top=0;
+				switch(flag){
+					case "left-up":
+						left=ex-124;
+						top=ey-97;
+						break;
+					case "left-down":
+						left=ex-124;
+						top=ey;
+						break;
+					case "right-up":
+						left=ex;
+						top=ey-97;
+						break;
+					case "right-down":
+						left=ex;
+						top=ey;
+						break;
+				}
+				console.log(left+"  "+top);
+				menu.style="display:block;top:"+top+"px;left:"+left+"px;";
+			}
+			document.onclick=function(e){
+				e=e? e:window.event;
+				if(e.pageX>=parseInt(menu.style.left)
+				&&e.pageX<=(parseInt(menu.style.left)+124)
+				&&e.pageY>=parseInt(menu.style.top)
+				&&e.pageY<=(parseInt(menu.style.top)+97)){
+					return;
+				}
+				menu.style="display:none;";
+			}
+		}
+	</script>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		html,body{
+			width:100%;
+			height:100%;
+		}
+		#text {
+			margin:50px;
+			background-color: #eee;
+			width: 1350px;
+			height: 680px;
+			outline: none;
+			border: none;
+		}
+		.menu{
+			display:none;
+			position:absolute;
+			top:0;
+			left:0;
+			border:2px solid #999;
+			border-radius:5px;
+			background:#fff;
+		}
+		.menu li{
+			list-style: none;
+			width:100px;
+			height:30px;
+			line-height:30px;
+			padding-left:20px;
+			border-bottom:1px solid #999;
+			cursor:pointer;
+		}
+		.menu li:hover{
+			background:#777;
+		}
+	</style>
+
+	<body>
+		<input type="textarea" value="right click to see the menu" id="text"></input>
+		<div class="menu" id="menu">
+			<ul>
+				<li>menu1</li>
+				<li>menu2</li>
+				<li>menu3</li>
+			</ul>
+		</div>
+	</body>
+
+</html>

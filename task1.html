@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style>
+		input{
+			display:none;
+		}
+		label {
+			position:relative;
+			display:inline-block;
+			background-image:url(img/task1.png);
+			background-position:-23px -9px;
+			width:19px;
+			height:40px;
+		}
+		label:hover{
+			cursor:pointer;
+		}
+		.r1:checked+label{
+			background-position:-58px -9px;
+		}
+		.r2:checked+label:before/*or after*/{
+			position:absolute;
+			background-image:url(img/task1.png);
+			background-position:-58px -9px;
+			width:19px;
+			height:40px;
+			content:'';
+			top:1px;
+		}
+	</style>
+
+	<body>
+		修改label的background-position
+		<br>
+		<input type="radio" class="r1" name="r1" id="radio1" checked>
+		<label for="radio1"></label>
+		<input type="radio" class="r1" name="r1" id="radio2">
+		<label for="radio2"></label>
+		<br>
+		添加label:before或label:after
+		<br>
+		<input type="radio" class="r2" name="r2" id="radio3" checked>
+		<label for="radio3"></label>
+		<input type="radio" class="r2" name="r2" id="radio4">
+		<label for="radio4"></label>
+	</body>
+ 
+</html>

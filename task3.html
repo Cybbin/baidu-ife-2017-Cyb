@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		//匹配13,14,15,18开头的手机号码
+		var reg1 = /\b1[3|4|5|8]\d{8}\b/;
+		var str1 = 1811111111;
+		console.log(reg1.test(str1));
+		
+		//匹配相邻是否有相同的字符串
+		var reg2 = /\b(\w+)\b\s+\1/;
+		var str2 = "foo bar foo";
+		console.log(reg2.test(str2));
+	</script>
+	<body>
+	</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title> 让文字颜色渐变 </title>
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<style type="text/css">
+			.wrapper {
+				position: relative;
+				width: 452px;
+				height: 250px;
+			}
+			
+			img {
+				position: absolute;
+				width: 404px;
+				height: 200px;
+				top: 50%;
+				left: 50%;
+				margin-left: -202px;
+				margin-top: -100px;
+			}
+			
+			.text {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				margin-left: -120px;
+				margin-top: -60px;
+				padding: 20px;
+				width: 200px;
+				height: 80px;
+				text-align: center;
+				font: 900 16px "微软雅黑";
+				opacity:0;
+				cursor:pointer;
+				background-image:-webkit-linear-gradient(left, #b670ef, #f26aa9 25%, #b670ef 50%, #f26aa9 75%, #b670ef);
+				background-image:-webkit-linear-gradient(left, #0000FF, #CC3299 25%, #00FFFF 50%, #CC3299 75%, #0000FF);
+				-webkit-background-clip:text;
+				-webkit-text-fill-color:transparent;
+				-webkit-background-size:700% 100%;
+			}
+			@-webkit-keyframes text-animation{
+				0%{
+					background-position:0 0;
+				}
+				100%{
+					background-position:-100% 0;
+				}
+			}
+			.text:before,
+			.text:after {
+				position: absolute;
+				opacity: 0;
+				content: "";
+				box-sizing: border-box;
+			}
+			.wrapper:hover>.text{
+				opacity:1;
+				transition-duration:1s;
+			}
+			.text:before {
+				border-top: 4px solid #fff;
+				border-bottom: 4px solid #fff;
+				top: 0;
+				left: 25%;
+				width: 50%;
+				height: 100%;
+			}
+			.wrapper:hover>.text:before {
+				opacity: 1;
+				left: 0;
+				width: 100%;
+				transition-duration:1s;
+			}
+			.text:after {
+				border-left: 4px solid #fff;
+				border-right: 4px solid #fff;
+				top: 25%;
+				left: 0;
+				width: 100%;
+				height: 50%;
+			}
+			
+			.wrapper:hover>.text:after {
+				opacity: 1;
+				top: 0;
+				height: 100%;
+				transition: all 1s;
+			}
+			.wrapper:hover>img{
+				transition-duration:1s;
+				filter:blur(6px);
+			}
+			.wrapper:hover>.text{
+				-webkit-animation:text-animation 4s infinite linear;
+			}
+		</style>
+		<link href="" style="text/css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="wrapper">
+			<img src="img/task4.png">
+			<div class="text">
+				<p>欢迎参加百度前端技术学院</p>
+				<p>点击报名</p>
+			</div>
+		</div>
+	</body>
+
+</html>
