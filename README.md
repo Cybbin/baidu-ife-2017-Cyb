@@ -6,3 +6,4 @@
 [正则表达式之入门](http://cybbin.com/baidu-ife-2017-Cyb/task3.html)  
 [有趣的鼠标悬浮模糊效果](http://cybbin.com/baidu-ife-2017-Cyb/task4.html)  
 [CSS3饼状loading效果](http://cybbin.com/baidu-ife-2017-Cyb/task5.html)  
+[使用CSS实现折叠面板](http://cybbin.com/baidu-ife-2017-Cyb/task6.html)  
