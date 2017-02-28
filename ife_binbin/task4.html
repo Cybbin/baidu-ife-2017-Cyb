@@ -6,30 +6,33 @@
 		<title>任务四：基础JavaScript练习（一）</title>
 	</head>
 	<style type="text/css">
-		.wrapper{
-			margin-top:10px;
+		.wrapper {
+			margin-top: 10px;
 		}
-		.num{
-			float:left;
-			height:40px;
-			width:40px;
-			line-height:40px;
+		
+		.num {
+			float: left;
+			height: 40px;
+			width: 40px;
+			line-height: 40px;
 			text-align: center;
-			background:red;
-			color:#fff;
-			margin-right:10px;
+			background: red;
+			color: #fff;
+			margin-right: 10px;
+			margin-bottom: 10px;
+			cursor: pointer;
 		}
 	</style>
 
 	<body>
-		<input type="text" id="input">
+		<input type="text" id="input" autofocus="autofocus">
 		<button id="left-in">左侧入</button>
 		<button id="right-in">右侧入</button>
 		<button id="left-out">左侧出</button>
 		<button id="right-out">右侧出</button>
 		<br>
 		<div class="wrapper" id="wrapper">
-			
+
 		</div>
 		<script type="text/javascript">
 			var btn1 = document.getElementById("left-in");
@@ -39,47 +42,70 @@
 			var wrapper = document.getElementById("wrapper");
 			var inp = document.getElementById("input");
 			var div = document.getElementById("wrapper").getElementsByTagName("div");
-			btn1.onclick=left_in;
-			btn2.onclick=right_in;
-			btn3.onclick=left_out;
-			btn4.onclick=right_out;
-			
+			btn1.onclick = left_in;
+			btn2.onclick = right_in;
+			btn3.onclick = left_out;
+			btn4.onclick = right_out;
+
 			/*
 			 * left_in方法
 			 * 左侧入按钮
-			 * 
+			 * 点击"左侧入"，将input中输入的数字从左侧插入队列中
 			 */
-			function left_in(){
-				wrapper.innerHTML="<div class='num'>"+inp.value+"</div>"+wrapper.innerHTML;
+			function left_in() {
+				if(inp.value.length == 0) {
+					return;
+				}
+				wrapper.innerHTML = "<div class='num'>" + inp.value + "</div>" + wrapper.innerHTML;
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function() {
+						this.outerHTML = "";
+					};
+				}
 			}
-			
+
 			/*
 			 * left_out方法
 			 * 左侧出按钮
-			 * 
+			 * 点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值
 			 */
-			function left_out(){
-				if(div.length===0){return;}
-				div[0].outerHTML="";
+			function left_out() {
+				if(div.length === 0) {
+					return;
+				}
+				alert(div[0].innerHTML);
+				div[0].outerHTML = "";
 			}
-			
+
 			/*
 			 * right_in方法
 			 * 右侧入按钮
-			 * 
+			 * 点击"右侧入"，将input中输入的数字从右侧插入队列中
 			 */
-			function right_in(){
-				wrapper.innerHTML+="<div class='num'>"+inp.value+"</div>";
+			function right_in() {
+				if(inp.value.length == 0) {
+					return;
+				}
+				wrapper.innerHTML += "<div class='num'>" + inp.value + "</div>";
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function() {
+						this.outerHTML = "";
+					};
+				}
 			}
-			
+
 			/*
 			 * right_out方法
 			 * 右侧出按钮
-			 * 
+			 * 点击"右侧出"，读取并删除队列又侧第一个元素，并弹窗显示元素中数值
 			 */
-			function right_out(){
-				if(div.length===0){return;}
-				div[div.length-1].outerHTML="";
+			function right_out() {
+				if(div.length === 0) {
+					return;
+				}
+				alert(div[div.length - 1].innerHTML);
+				div[div.length - 1].outerHTML = "";
+
 			}
 		</script>
 	</body>
