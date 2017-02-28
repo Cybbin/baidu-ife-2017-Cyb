@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务五：基础JavaScript练习（二）</title>
+	</head>
+	<style type="text/css">
+		.wrapper {
+			margin-top: 10px;
+			height: 150px;
+			position: relative;
+		}
+		
+		.num {
+			position: absolute;
+			bottom: 0;
+			float: left;
+			background: red;
+			width: 15px;
+			margin-right: 1px;
+			margin-bottom: 10px;
+			cursor: pointer;
+		}
+	</style>
+
+	<body>
+		<input type="text" id="input" autofocus="autofocus">
+		<button id="left-in">左侧入</button>
+		<button id="right-in">右侧入</button>
+		<button id="left-out">左侧出</button>
+		<button id="right-out">右侧出</button>
+		<button id="sort1">排序（从小到大）</button>
+		<button id="sort2">排序（从大到小）</button>
+		<br>
+		<div class="wrapper" id="wrapper">
+		</div>
+		<script type="text/javascript">
+			var btn1 = document.getElementById("left-in");
+			var btn2 = document.getElementById("right-in");
+			var btn3 = document.getElementById("left-out");
+			var btn4 = document.getElementById("right-out");
+			var btn5 = document.getElementById("sort1");
+			var btn6 = document.getElementById("sort2");
+			var wrapper = document.getElementById("wrapper");
+			var inp = document.getElementById("input");
+			var div = document.getElementById("wrapper").getElementsByTagName("div");
+			btn1.onclick = left_in;
+			btn2.onclick = right_in;
+			btn3.onclick = left_out;
+			btn4.onclick = right_out;
+			btn5.onclick = sort1;
+			btn6.onclick = sort2;
+
+			/*
+			 * left_in方法
+			 * 左侧入按钮
+			 * 点击"左侧入"，将input中输入的数字从左侧插入队列中
+			 */
+			function left_in() {
+				if(inp.value.length == 0) {
+					return;
+				}
+				if(inp.value < 10 || inp.value > 100) {
+					alert("输入的数字在10-100之间！！！");
+					return;
+				}
+				if(div.length > 60) {
+					alert("队列限制60个！！！");
+					return;
+				}
+				for(let i = 0; i < div.length; i++) {
+					div[i].style = "height: " + parseInt(div[i].style.height) + "px;left: " + (parseInt(div[i].style.left) + 16) + "px";
+				}
+				wrapper.innerHTML = "<div class='num' style='height:" + inp.value + "px;left:0px;'></div>" + wrapper.innerHTML;
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function() {
+						this.outerHTML = "";
+						for(let j = i; j < div.length; j++) {
+							div[j].style.left = (parseInt(div[j].style.left) - 16) + "px";
+						}
+					};
+				}
+			}
+
+			/*
+			 * left_out方法
+			 * 左侧出按钮
+			 * 点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值
+			 */
+			function left_out() {
+				if(div.length === 0) {
+					return;
+				}
+				alert(parseInt(div[0].style.height));
+				div[0].outerHTML = "";
+				for(let i = 0; i < div.length; i++) {
+					div[i].style.left = (parseInt(div[i].style.left) - 16) + "px";
+				}
+			}
+
+			/*
+			 * right_in方法
+			 * 右侧入按钮
+			 * 点击"右侧入"，将input中输入的数字从右侧插入队列中
+			 */
+			function right_in() {
+				if(inp.value.length == 0) {
+					return;
+				}
+				if(inp.value < 10 || inp.value > 100) {
+					alert("输入的数字在10-100之间！！！");
+					return;
+				}
+				if(div.length > 60) {
+					alert("队列限制60个！！！");
+					return;
+				}
+				var left = div.length * 16;
+				wrapper.innerHTML += "<div class='num' style='height:" + inp.value + "px;left:" + left + "px;'></div>";
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function() {
+						this.outerHTML = "";
+						for(let j = i; j < div.length; j++) {
+							div[j].style.left = (parseInt(div[j].style.left) - 16) + "px";
+						}
+					};
+				}
+			}
+
+			/*
+			 * right_out方法
+			 * 右侧出按钮
+			 * 点击"右侧出"，读取并删除队列又侧第一个元素，并弹窗显示元素中数值
+			 */
+			function right_out() {
+				if(div.length === 0) {
+					return;
+				}
+				alert(parseInt(div[div.length - 1].style.height));
+				div[div.length - 1].outerHTML = "";
+			}
+
+			/*
+			 * sort1方法
+			 * 排序按钮
+			 * 实现从小到大排序功能
+			 */
+			function sort1() {
+				if(div.length < 2) {
+					return;
+				}
+				for(let i = 0; i < div.length - 1; i++) {
+					for(let j = i + 1; j < div.length; j++) {
+						if(parseInt(div[i].style.height) > parseInt(div[j].style.height)) {
+							let temp = div[i].style.height;
+							div[i].style.height = div[j].style.height;
+							div[j].style.height = temp;
+						}
+					}
+				}
+				//				var html="";
+				//				for(let i=0;i<div.length;i++){
+				//					html+=div[i];
+				//				}
+				//				wrapper.innerHTML=html;
+			}
+
+			/*
+			 * sort2方法
+			 * 排序按钮
+			 * 实现从小到大排序功能
+			 */
+			function sort2() {
+				if(div.length < 2) {
+					return;
+				}
+				for(let i = 0; i < div.length - 1; i++) {
+					for(let j = i + 1; j < div.length; j++) {
+						if(parseInt(div[i].style.height) < parseInt(div[j].style.height)) {
+							let temp = div[i].style.height;
+							div[i].style.height = div[j].style.height;
+							div[j].style.height = temp;
+						}
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>
