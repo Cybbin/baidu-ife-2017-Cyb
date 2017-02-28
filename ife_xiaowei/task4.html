@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin:0;
+				padding:0;
+			}
+						/*1. 绝对定位居中*/
+			 .wrapper1{
+				position:absolute;
+				background:#ccc;
+				width:400px;
+				height:200px;
+				top:50%;
+				left:50%;
+				margin-top:-100px;
+				margin-left:-200px;
+			}
+			/*
+			2. flex 居中
+			 html,body{
+				width:100%;
+				height:100%;
+			}
+			.wrapper{
+				width:100%;
+				height:100%;
+				display:flex;
+				justify-content:center;
+				align-items:center;
+			}
+			.wrapper2{
+				position:relative;
+				background:#ccc;
+				width:400px;
+				height:200px;
+			}*/
+			/*
+			3.table居中 html,body{
+				width:100%;
+				height:100%;
+			}
+			.wrapper{
+				width:100%;
+				height:100%;
+				display:table;
+			}
+			.wrapper3{
+				display:table-cell;
+				vertical-align:middle;
+			}
+			.inner{
+				position:relative;
+				background:#ccc;
+				width:400px;
+				height:200px;
+				margin:0 auto;
+			}*/
+			.circle1{
+				position:absolute;
+				background:yellow;
+				width:50px;
+				height:50px;
+				border-radius:0 0 50px 0;
+				left:0;
+				top:0;
+			}
+			.circle2{
+				position:absolute;
+				background:yellow;
+				width:50px;
+				height:50px;
+				border-radius:50px 0 0 0;
+				right:0;
+				bottom:0;
+			}
+		</style>
+	</head>
+	<body>
+		<!--绝对定位居中-->
+		<div class="wrapper1">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+		</div>
+		
+		<!--flex居中
+			<div class="wrapper">
+		<div class="wrapper2">
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+		</div>
+		</div>-->
+		
+		<!--table居中
+			<div class="wrapper">
+			<div class="wrapper3">
+				<div class="inner">
+					<div class="circle1"></div>
+					<div class="circle2"></div>
+				</div>
+			</div>
+		</div>-->
+	</body>
+</html>
