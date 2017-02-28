@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务四：基础JavaScript练习（一）</title>
+	</head>
+	<style type="text/css">
+		.wrapper{
+			margin-top:10px;
+		}
+		.num{
+			float:left;
+			height:40px;
+			width:40px;
+			line-height:40px;
+			text-align: center;
+			background:red;
+			color:#fff;
+			margin-right:10px;
+		}
+	</style>
+
+	<body>
+		<input type="text" id="input">
+		<button id="left-in">左侧入</button>
+		<button id="right-in">右侧入</button>
+		<button id="left-out">左侧出</button>
+		<button id="right-out">右侧出</button>
+		<br>
+		<div class="wrapper" id="wrapper">
+			
+		</div>
+		<script type="text/javascript">
+			var btn1 = document.getElementById("left-in");
+			var btn2 = document.getElementById("right-in");
+			var btn3 = document.getElementById("left-out");
+			var btn4 = document.getElementById("right-out");
+			var wrapper = document.getElementById("wrapper");
+			var inp = document.getElementById("input");
+			var div = document.getElementById("wrapper").getElementsByTagName("div");
+			btn1.onclick=left_in;
+			btn2.onclick=right_in;
+			btn3.onclick=left_out;
+			btn4.onclick=right_out;
+			
+			/*
+			 * left_in方法
+			 * 左侧入按钮
+			 * 
+			 */
+			function left_in(){
+				wrapper.innerHTML="<div class='num'>"+inp.value+"</div>"+wrapper.innerHTML;
+			}
+			
+			/*
+			 * left_out方法
+			 * 左侧出按钮
+			 * 
+			 */
+			function left_out(){
+				if(div.length===0){return;}
+				div[0].outerHTML="";
+			}
+			
+			/*
+			 * right_in方法
+			 * 右侧入按钮
+			 * 
+			 */
+			function right_in(){
+				wrapper.innerHTML+="<div class='num'>"+inp.value+"</div>";
+			}
+			
+			/*
+			 * right_out方法
+			 * 右侧出按钮
+			 * 
+			 */
+			function right_out(){
+				if(div.length===0){return;}
+				div[div.length-1].outerHTML="";
+			}
+		</script>
+	</body>
+
+</html>
