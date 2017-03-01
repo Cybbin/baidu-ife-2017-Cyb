@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务六：基础JavaScript练习（三）</title>
+	</head>
+	<style type="text/css">
+		.wrapper {
+			margin-top: 10px;
+		}
+		.num {
+			float: left;
+			height: 40px;
+			padding: 0 10px;
+			line-height: 40px;
+			text-align: center;
+			background: red;
+			color: #fff;
+			margin-right: 10px;
+			margin-bottom: 10px;
+		}
+	</style>
+	<body>
+		<textarea type="text" id="textarea" autofocus="autofocus" cols="50" rows="5"></textarea>
+		<input type="text" id="input">
+		<button id="search">查询</button>
+		<div class="wrapper" id="wrapper"></div>
+		<script type="text/javascript">
+			var btn = document.getElementById('search');
+			var inp = document.getElementById('input');
+			var txt = document.getElementById('textarea');
+			var wrapper = document.getElementById("wrapper");
+			var div = document.getElementById("wrapper").getElementsByTagName("div");
+
+			btn.onclick = search;
+			inp.onclick = add;
+
+			function add() {
+				wrapper.innerHTML="";
+				var reg = /\w+/g;
+				var arr;
+				while((arr = reg.exec(txt.value)) != null) {
+					wrapper.innerHTML += "<div class='num'>" + arr + "</div>";
+				}
+			}
+			function search() {
+				for(let i = 0; i < div.length; i++) {
+					div[i].style.color = "#fff";
+				}
+				var r = new RegExp(".*" + inp.value + ".*");
+				for(let i = 0; i < div.length; i++) {
+					if(r.test(div[i].innerHTML)) {
+						div[i].style.color = "#418C59";
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

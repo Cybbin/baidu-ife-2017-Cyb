@@ -30,3 +30,4 @@
 [任务三：零基础JavaScript编码（三）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task3.html)  
 [任务四：基础JavaScript练习（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task4.html)  
 [任务五：基础JavaScript练习（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task5.html)  
+[任务六：基础JavaScript练习（三）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task6.html)  
