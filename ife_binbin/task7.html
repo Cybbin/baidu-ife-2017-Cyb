@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务七：JavaScript和树（一）</title>
+	</head>
+	<style>
+		div {
+			padding: 30px;
+			border: 1px solid #666;
+			display: inline-block;
+			background:#fff;
+		}
+	</style>
+
+	<body>
+		<div id="tree">
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<button id="btn1">前序</button>
+		<button id="btn2">中序</button>
+		<button id="btn3">后序</button>
+		<script>
+			var tree = document.getElementById('tree'),
+				div = document.getElementsByTagName('div'),
+				btn1 = document.getElementById('btn1'),
+				btn2 = document.getElementById('btn2'),
+				btn3 = document.getElementById('btn3'),
+				list = [];
+
+			btn1.onclick = function() {
+				init();
+				preOrder(tree);
+				show();
+			};
+			btn2.onclick = function() {
+				init();
+				inOrder(tree);
+				show();
+			};
+			btn3.onclick = function() {
+				init();
+				postOrder(tree);
+				show();
+			};
+			/*
+			 * show方法
+			 * 按前中后序显示背景颜色
+			 * 
+			 * */
+			function show() {
+				let i = 0;
+				list[i].style.background = "red";
+				var si;
+				si=setInterval(function(){
+					i++;
+					if(i<list.length){
+						list[i-1].style.background="#fff";
+						list[i].style.background="red";
+					}else{
+						clearInterval(si);
+						list[i-1].style.background="#fff";
+						
+					}
+				},500);
+			}
+			/*
+			 * init方法
+			 * 初始化div的背景颜色和list
+			 * 
+			 * */
+			function init(){
+				list=[];
+				
+			}
+			/*
+			 * preOrder方法
+			 * 前序遍历
+			 * 
+			 * */
+			function preOrder(r) {
+				if(r != null) {
+					list.push(r);
+					preOrder(r.firstElementChild);
+					preOrder(r.lastElementChild);
+				}
+			}
+			/*
+			 * inOrder方法
+			 * 中序遍历
+			 * 
+			 * */
+			function inOrder(r) {
+				if(r != null) {
+					inOrder(r.firstElementChild);
+					list.push(r);
+					inOrder(r.lastElementChild);
+				}
+			}
+			/*
+			 * postOrder方法
+			 * 后序遍历
+			 * 
+			 * */
+			function postOrder(r) {
+				if(r != null) {
+					postOrder(r.firstElementChild);
+					postOrder(r.lastElementChild);
+					list.push(r);
+				}
+			}
+		</script>
+	</body>
+
+</html>
