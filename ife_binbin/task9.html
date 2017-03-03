@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务九：JavaScript和树（三）</title>
+	</head>
+	<style>
+		div {
+			padding: 10px;
+			display: inline-block;
+			border: 1px solid #666;
+			background: #fff;
+			cursor: pointer;
+		}
+		
+		button {
+			margin-top: 20px;
+		}
+	</style>
+
+	<body>
+		<div id="tree">
+			<span>super</span>
+			<div>
+				<span>a</span>
+				<div><span>a-0</span></div>
+				<div><span>a-1</span></div>
+				<div><span>a-2</span></div>
+				<div><span>a-3</span></div>
+				<div><span>a-4</span></div>
+				<div><span>a-5</span></div>
+				<div><span>a-6</span></div>
+			</div>
+			<div>
+				<span>b</span>
+				<div>
+					<span>b-0</span>
+					<div><span>b-0-0</span></div>
+					<div><span>b-0-1</span></div>
+					<div><span>b-0-2</span></div>
+				</div>
+				<div>
+					<span>b-1</span>
+					<div><span>b-1-0</span></div>
+					<div><span>b-1-1</span></div>
+				</div>
+				<div><span>b-2</span></div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<button id="btn1">遍历</button>
+		<input type="text" id="inp1">
+		<button id="btn2">查询</button>
+		<br>
+		<input type="text" id="inp2">
+		<button id="btn3">添加</button>
+		<button id="btn4">删除</button>
+		<script>
+			var tree = document.getElementById("tree"),
+				btn1 = document.getElementById("btn1"),
+				btn2 = document.getElementById("btn2"),
+				btn3 = document.getElementById("btn3"),
+				btn4 = document.getElementById("btn4"),
+				inp1 = document.getElementById("inp1"),
+				inp2 = document.getElementById("inp2"),
+				div = document.getElementsByTagName("div"),
+				list = [],
+				listElement = [];
+
+			init();
+
+			/*
+			 * init方法
+			 * 添加按钮和节点的点击事件
+			 * 
+			 * */
+			function init() {
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function(e) {
+						e.stopPropagation(); // 阻止点击事件向上冒泡
+						for(let i = 0; i < div.length; i++) {
+							div[i].style.background = "#fff";
+						}
+						this.style.background = "red";
+					};
+				}
+				btn1.onclick = btn1Click;
+				btn2.onclick = btn2Click;
+				btn3.onclick = btn3Click;
+				btn4.onclick = btn4Click;
+			}
+
+			/*
+			 * btn1Click方法
+			 * 遍历按钮点击时事件
+			 * 
+			 * */
+			function btn1Click() {
+				for(let i = 0; i < list.length; i++) {
+					list[i].style.background = "#fff";
+				}
+				list = [];
+				listElement = [];
+				order(tree);
+				show(false);
+			}
+			/*
+			 * btn2Click方法
+			 * 查询按钮点击时事件
+			 * 
+			 * */
+
+			function btn2Click() {
+				for(let i = 0; i < list.length; i++) {
+					list[i].style.background = "#fff";
+				}
+				list = [];
+				listElement = [];
+				order(tree);
+				show(true);
+			}
+
+			/*
+			 * btn3Click方法
+			 * 添加按钮点击时事件
+			 * 
+			 * */
+			function btn3Click() {
+				if(inp2.value == "") {
+					alert("请输入要添加节点的内容!!");
+					return;
+				}
+				div = document.getElementsByTagName("div");
+				var node = document.createElement("div");
+				node.innerHTML = "<span>" + inp2.value + "</span>";
+				for(let i = 0; i < div.length; i++) {
+					if(div[i].style.background == "red") {
+						console.log(div[i]);
+						div[i].appendChild(node);
+						break;
+					}else if(i==div.length-1){
+						alert("请选中要输入的节点!!");
+					}
+				}
+				
+				for(let i = 0; i < div.length; i++) {
+					div[i].onclick = function(e) {
+						e.stopPropagation(); // 阻止点击事件向上冒泡
+						for(let i = 0; i < div.length; i++) {
+							div[i].style.background = "#fff";
+						}
+						this.style.background = "red";
+					};
+				}
+				order(tree);
+			}
+
+			/*
+			 * btn4Click方法
+			 * 删除按钮点击时事件
+			 * 
+			 * */
+			function btn4Click() {
+				div = document.getElementsByTagName("div");
+				for(let i = 0; i < div.length; i++) {
+					if(div[i].style.background == "red") {
+						if(i === 0) {
+							alert("该节点无法删除!!");
+							break;
+						}
+						div[i].outerHTML = "";
+						break;
+					}
+				}
+			}
+
+			/*
+			 * show方法
+			 * 遍历显示背景颜色
+			 * 
+			 * */
+			function show(flag) {
+				let i = 0;
+				list[i].style.background = "red";
+				if(listElement[i] == inp1.value && flag) {
+					clearInterval(si);
+					return;
+				}
+				var si = setInterval(function() {
+					i++;
+					if(i < list.length) {
+						list[i - 1].style.background = "#fff";
+						list[i].style.background = "red";
+						if(listElement[i] == inp1.value && flag) {
+							clearInterval(si);
+							return;
+						}
+					} else {
+						clearInterval(si);
+						list[i - 1].style.background = "#fff";
+						if(flag) {
+							alert("找不到该元素!!");
+						}
+					}
+				}, 500);
+			}
+			/*
+			 * order方法
+			 * 存储节点
+			 * 
+			 * */
+			function order(r) {
+				list.push(r);
+				var t = r.childNodes;
+				for(let i = 0; i < t.length; i++) {
+					if(r.childNodes[i].nodeName == "DIV") {
+						order(t[i]);
+					} else if(r.childNodes[i].nodeName == "SPAN") {
+						listElement.push(r.childNodes[i].innerHTML);
+					}
+				}
+			}
+		</script>
+	</body>
+
+</html>
