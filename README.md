@@ -33,3 +33,4 @@
 [任务六：基础JavaScript练习（三）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task6.html)  
 [任务七：JavaScript和树（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task7.html)  
 [任务八：JavaScript和树（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task8.html)  
+[任务九：JavaScript和树（三）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task9.html)  
