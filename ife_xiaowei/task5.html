@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务五：零基础HTML及CSS编码（二）</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				background: #dedede;
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			li {
+				float: left;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			h1 {
+				float: left;
+				margin-left: 40px;
+				color: #e30105;
+			}
+			
+			h2 {}
+			
+			h3 {
+				font-size: 18px;
+				color: #767777;
+			}
+			
+			.title {
+				width: 100%;
+				height: 70px;
+				background: #333333;
+				line-height: 70px;
+				margin-bottom: 30px;
+			}
+			
+			.title .nav {
+				float: right;
+			}
+			
+			.title a {
+				color: #fff;
+				margin-right: 20px;
+				font-size: 14px;
+			}
+			
+			.title a:hover {
+				color: #ddd;
+			}
+			
+			.article {
+				background: #fff;
+				padding: 20px;
+				line-height: 40px;
+				margin-bottom: 20px;
+			}
+			.a{
+				overflow: hidden;
+				margin-left:20px;
+			}
+			.article .author {
+				font-size: 12px;
+				color: #aaa;
+			}
+			
+			.article .con {
+				font-size: 14px;
+				line-height: 24px;
+				text-indent: 28px;
+			}
+			
+			.article img {
+				height: 200px;
+				width: 400px;
+			}
+			
+			.article ul {
+				height: 120px;
+				margin-left: 50px;
+			}
+			
+			.article3{
+				/*display:inline-block;*/
+			}
+			.article3 ul {
+				margin-top: 30px;
+			}
+			
+			.article3 li {
+				float: left;
+				margin-bottom: 20px;
+				margin-right: 20px;
+				width: 200px;
+				height: 200px;
+				border: 1px solid #eee;
+				text-align: center;
+			}
+			
+			.article3 img {
+				width: 150px;
+				height: 150px;
+			}
+			
+			.article4 ol {
+				margin-left: 30px;
+			}
+			
+			.article4 table {
+				border: 1px solid #ccc;
+				width: 100%;
+			}
+			
+			.article4 tr th {
+				background: #333333;
+				color: #fff;
+				padding: 0 10px;
+			}
+			
+			.article4 tr td {
+				border-right: 1px solid #ccc;
+				border-bottom: 1px solid #ccc;
+			}
+			
+			.article4 tfoot {
+				background: #CCCCCC;
+			}
+			
+			.article5 {
+				float: right;
+				background: #fff;
+				margin:0 20px;
+				width:400px;
+			}
+			
+			.article5 .tit {
+				border-left: 3px solid #999;
+				padding-left: 30px;
+				margin:20px;
+			}
+			
+			.article5 form {
+				position: relative;
+				width: 200px;
+				line-height: 30px;
+				font-size: 12px;
+				padding-left:110px;
+				margin:0 auto;
+			}
+			
+			.article label {
+				position: relative;
+				display: block;
+				margin-bottom: 0;
+			}
+			
+			.article5 label span {
+				position: absolute;
+				display: block;
+				width: 110px;
+				text-align: right;
+				font-size:12px;
+				left:0;
+			}
+			
+			.article5 label p {
+				color: #999;
+			}
+			
+			.article5 label input {
+				top: 8px;
+				right: 0;
+			}
+			
+			.article5 label textarea {
+				width: 170px;
+				height: 150px;
+			}
+			
+			.article5 .submit {
+				background: #3355D0;
+				text-align: center;
+				color: #fff;
+				outline: none;
+				border: 0;
+				height: 30px;
+				line-height: 30px;
+				font-size: 14px;
+				border-radius: 10px;
+				cursor:pointer;
+				padding:0 100px;
+				margin-left:-80px;
+				margin-bottom:20px;
+			}
+			
+			.footer{
+				width:100%;
+				background:#000;
+				color:#fff;
+				text-align:center;
+				height:70px;
+				line-height:70px;
+			}
+			
+			a {
+				color: #0000FF;
+			}
+			
+			a:hover {
+				color: #418C59;
+			}
+			
+			a:link {
+				color: #999999;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="title">
+			<h1>Bai百度</h1>
+			<ul class="nav">
+				<li>
+					<a href="#">导航连接一</a>
+				</li>
+				<li>
+					<a href="#">导航连接二</a>
+				</li>
+				<li>
+					<a href="#">导航连接三</a>
+				</li>
+				<li>
+					<a href="#">导航连接四</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="article5">
+			<p class="tit">这里以后是一个侧栏，这是侧栏的标题</p>
+			<form>
+				<label>
+					<span>请输入邮箱地址：</span><input type="text">
+					<p>邮箱地址请按有求格式输入</p>
+				</label>
+				<label><span>请输入密码：</span><input type="password"></label>
+				<label>
+					<span>请重复输入密码：</span><input type="password">
+					<p>密码请为6~16位英文数字</p>
+				</label>
+
+				<label class="sex">
+					<span>性别：</span>
+					<input type="radio" name="sex">男
+					<input type="radio" name="sex">女
+				</label>
+				<br>
+				<label>
+					<span>城市：</span>
+					<select>
+						<option>北京</option>
+						<option>上海</option>
+						<option>广州</option>
+						<option>深圳</option>
+					</select>
+				</p>
+				</label>
+				<label>
+					<span>爱好：</span>
+					<input type="checkbox">运动
+					<input type="checkbox">艺术
+					<input type="checkbox">科学</p>
+				</label>
+				<label>
+					<span>个人描述：</span>
+					<textarea></textarea>
+				</label>
+				<input type="submit" value="确认提交" class="submit">
+			</form>
+		</div>
+		<div class="a">
+			<div class="article">
+				<h2>文章一级标题</h2>
+				<h3>文章二级标题</h3>
+				<p class="author">文章作者 文章发表时间</p>
+				<p class="con">
+					长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落
+				</p>
+				<p class="con">
+					长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落
+					<a href="http://ife.baidu.com">链接到http://ife.baidu.com</a>
+				</p>
+				<img src="img/5.jpg">
+				<p class="con">
+					长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落
+					<a href="http://ife.baidu.com">链接到http://ife.baidu.com</a>
+				</p>
+			</div>
+
+			<div class="article">
+				<h2>另一篇文章一级标题</h2>
+				<h3>文章二级标题</h3>
+				<p class="author">文章作者 文章发表时间</p>
+				<p class="con">
+					长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落
+				</p>
+				<p class="con">
+					长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落 长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落长段落
+					<a href="http://ife.baidu.com">链接到http://ife.baidu.com</a>
+				</p>
+				<ul>
+					<li>列表项目一</li>
+					<li>列表项目二</li>
+					<li>列表项目三</li>
+				</ul>
+			</div>
+
+			<div class="article article3">
+				<h2>图片</h2>
+				<ul>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+					<li>
+						<p>好看的图片</p><img src="img/5.jpg"></li>
+				</ul>
+					<div style="clear:both;"></div>
+			</div>
+
+			<div class="article article4">
+				<h2>最后一篇文章的一级标题</h2>
+				<h3>文章二级标题</h3>
+				<p class="author">文章作者 文章发表时间</p>
+				<ol>
+					<li>排名1</li>
+					<li>排名2</li>
+					<li>排名3</li>
+				</ol>
+				下面是一个表格
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<th>表头</th>
+						<th>表头</th>
+						<th>表头</th>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td>
+							<a href="#">操作</a>
+						</td>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td>
+							<a href="#">操作</a>
+						</td>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td>
+							<a href="#">操作</a>
+						</td>
+					</tr>
+					<tfoot>
+						<td>总计</td>
+						<td>1000</td>
+						<td></td>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<div class="footer">
+			<p>@版权所有</p>
+		</div>
+	</body>
+
+</html>
