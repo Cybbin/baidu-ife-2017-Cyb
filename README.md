@@ -35,3 +35,8 @@
 [任务七：JavaScript和树（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task7.html)  
 [任务八：JavaScript和树（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task8.html)  
 [任务九：JavaScript和树（三）](http://cybbin.com/baidu-ife-2017-Cyb/ife_binbin/task9.html)  
+
+# 耀耀学院
+
+[任务一：表单（一）单个表单项的检验](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task1.html)  
+[任务二：表单（二）多个表单项的动态校验](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task2.html)  

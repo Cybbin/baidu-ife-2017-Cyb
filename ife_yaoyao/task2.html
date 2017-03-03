@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务二：表单（二）多个表单项的动态校验</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			form {
+				position: relative;
+				width: 300px;
+				margin: 0 auto;
+				margin-top: 50px;
+				padding-left: 100px;
+			}
+			
+			label {
+				margin-bottom: 20px;
+				display: inline-block;
+			}
+			
+			span {
+				position: absolute;
+				font-weight: 700;
+				font-size: 20px;
+				left: 0;
+				width: 100px;
+				text-align: right;
+			}
+			
+			input {
+				margin: 0 20px;
+				height: 30px;
+				font-size: 18px;
+				border-radius: 5px;
+				outline: none;
+				border: 1px solid #D1D1D1;
+				padding: 0 10px;
+				overflow: hidden;
+			}
+			
+			button {
+				background: #2f79ba;
+				color: #fff;
+				border-radius: 5px;
+				border: none;
+				padding: 6px 20px;
+				outline: none;
+				cursor: pointer;
+				font-size: 18px;
+			}
+			
+			p {
+				margin-left: 20px;
+				margin-top: 5px;
+				font-size: 14px;
+				color: #999;
+				opacity: 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<form autocomplete="on">
+			<label>
+				<span>名称</span>
+				<input type="text" id="name" onblur="name_blur(this)" onfocus="name_focus()" autocomplete="on">
+				<p id="name-info">必填，长度为4~16个字符</p>
+			</label>
+			<label>
+				<span>密码</span>
+				<input type="password" id="pw1" onblur="pw1_blur(this)" onfocus="pw1_focus()" autocomplete="on">
+				<p id="pw1-info">输入密码</p>
+			</label>
+			<label>
+				<span>密码确认</span>
+				<input type="password" id="pw2" onblur="pw2_blur(this)" onfocus="pw2_focus()">
+				<p id="pw2-info">再次输入相同密码</p>
+			</label>
+			<label>
+				<span>邮箱</span>
+				<input type="text" id="email" onblur="email_blur(this)" onfocus="email_focus()">
+				<p id="email-info">输入邮箱</p>
+			</label>
+			<label>
+				<span>手机</span>
+				<input type="text" id="phone" onblur="phone_blur(this)" onfocus="phone_focus()">
+				<p id="phone-info">输入手机号码</p>
+			</label>
+			<button id="submit">提交</button>
+		</form>
+		<script>
+			var name = document.getElementById("name"),
+				pw1 = document.getElementById("pw1"),
+				pw2 = document.getElementById("pw2"),
+				email = document.getElementById("email"),
+				phone = document.getElementById("phone"),
+				name_info = document.getElementById("name-info"),
+				pw1_info = document.getElementById("pw1-info"),
+				pw2_info = document.getElementById("pw2-info"),
+				email_info = document.getElementById("email-info"),
+				phone_info = document.getElementById("phone-info"),
+				btn = document.getElementById("submit");
+			
+			var f1,f2,f3,f4,f5;
+			btn.onclick=function(){
+				if(f1&&f2&&f3&&f4&&f5){
+					alert("输入成功！");
+				}else{
+					alert("输入有误！");
+				}
+			}
+			function name_focus() {
+				name_info.style.opacity = "1";
+			}
+
+			function name_blur(th) {
+				var len = th.value.replace(/[\u4e00-\u9fa5]/g, "aa").length;
+				if(th.value == "") {
+					name_info.innerHTML = "名称不能为空";
+					name_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				} else if(len >= 4 && len <= 16) {
+					name_info.innerHTML = "名字格式正确";
+					name_info.style.color = "#64bb49";
+					th.style.borderColor = "#64bb49";
+					f1=true;
+				} else {
+					name_info.innerHTML = "姓名格式错误,长度必须为4~16个字符";
+					name_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				}
+			}
+
+			function pw1_focus() {
+				pw1_info.style.opacity = "1";
+			}
+
+			function pw1_blur(th) {
+				if(th.value == "") {
+					pw1_info.innerHTML = "密码不能为空";
+					pw1_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				} else if(pw2.value !== "" && th.value !== pw2.value) {
+					pw2_info.innerHTML = "两次密码不相同";
+					pw2_info.style.color = "#e8535d";
+					pw2.style.borderColor = "#e8535d";
+				} else {
+					pw1_info.innerHTML = "密码可用";
+					pw1_info.style.color = "#64bb49";
+					th.style.borderColor = "#64bb49";
+					f2=true;
+					if(pw1.value == pw2.value) {
+						pw2_info.innerHTML = "密码输入一致";
+						pw2_info.style.color = "#64bb49";
+						pw2.style.borderColor = "#64bb49";
+					}
+				}
+			}
+
+			function pw2_focus() {
+				pw2_info.style.opacity = "1";
+			}
+
+			function pw2_blur(th) {
+				if(th.value !== pw1.value) {
+					pw2_info.innerHTML = "两次密码不相同";
+					pw2_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				} else if(th.value == "") {
+					pw2_info.innerHTML = "确认密码不能为空";
+					pw2_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				} else {
+					pw2_info.innerHTML = "密码输入一致";
+					pw2_info.style.color = "#64bb49";
+					th.style.borderColor = "#64bb49";
+					f3=true;
+				}
+			}
+
+			function email_focus() {
+				email_info.style.opacity = "1";
+			}
+
+			function email_blur(th) {
+				var r = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+				if(r.test(email.value)){
+					email_info.innerHTML = "邮箱格式正确";
+					email_info.style.color = "#64bb49";
+					th.style.borderColor = "#64bb49";
+					f4=true;
+				}else if(email.value==""){
+					email_info.innerHTML = "邮箱不能为空";
+					email_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				}else{
+					email_info.innerHTML = "邮箱格式错误";
+					email_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				}
+			}
+
+			function phone_focus() {
+				phone_info.style.opacity = "1";
+			}
+
+			function phone_blur(th) {
+				var r = /^1(3|4|5|7|8)\d{9}$/;
+				if(r.test(phone.value)){
+					phone_info.innerHTML = "手机格式正确";
+					phone_info.style.color = "#64bb49";
+					th.style.borderColor = "#64bb49";
+					f5=true;
+				}else if(phone.value==""){
+					phone_info.innerHTML = "手机不能为空";
+					phone_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				}else{
+					phone_info.innerHTML = "手机格式错误";
+					phone_info.style.color = "#e8535d";
+					th.style.borderColor = "#e8535d";
+				}
+			}
+		</script>
+	</body>
+
+</html>
