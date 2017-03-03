@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务一：表单（一）单个表单项的检验</title>
+	</head>
+	<style>
+		span{
+			font-weight:700;
+			font-size:20px;
+		}
+		input{
+			margin:0 20px;
+			height:30px;
+			font-size:18px;
+			border-radius:5px;
+			outline:none;
+			border:1px solid #D1D1D1;
+			padding:0 10px;
+			overflow:hidden;
+		}
+		button{
+			background:#2f79ba;
+			color:#fff;
+			border-radius:5px;
+			border:none;
+			padding:6px 20px;
+			outline:none;
+			cursor:pointer;
+			font-size:18px;
+		}
+		p{
+			margin-left:60px;
+			margin-top:5px;
+			font-size:14px;
+			color:#999;
+		}
+	</style>
+
+	<body>
+		<span>名称</span><input type="text" id="inp"> <button id="btn">验证</button>
+		<p id="info">必填，长度为4~16个字符</p>
+		<script>
+			var inp = document.getElementById("inp");
+			var btn = document.getElementById("btn");
+			var info = document.getElementById("info");
+			btn.onclick=function(){
+				var r1 = /^[\u4e00-\u9fa5]{2,8}$/;
+				var r2 = /^\w{4,16}$/;
+				var len = inp.value.replace(/[\u4e00-\u9fa5]/g,"aa").length;
+				if(inp.value==""){
+					info.innerHTML="姓名不能为空";
+					info.style.color="#e8535d";
+					inp.style.borderColor="#e8535d";
+				}else if(len>=4&&len<=16){
+					info.innerHTML="名字格式正确";
+					info.style.color="#64bb49";
+					inp.style.borderColor="#64bb49";
+				}else {
+					info.innerHTML="姓名格式错误,长度必须为4~16个字符";
+					info.style.color="#e8535d";
+					inp.style.borderColor="#e8535d";
+				}
+			}
+		</script>
+	</body>
+
+</html>
