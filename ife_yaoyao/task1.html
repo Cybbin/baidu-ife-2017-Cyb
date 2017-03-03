@@ -46,8 +46,6 @@
 			var btn = document.getElementById("btn");
 			var info = document.getElementById("info");
 			btn.onclick=function(){
-				var r1 = /^[\u4e00-\u9fa5]{2,8}$/;
-				var r2 = /^\w{4,16}$/;
 				var len = inp.value.replace(/[\u4e00-\u9fa5]/g,"aa").length;
 				if(inp.value==""){
 					info.innerHTML="姓名不能为空";
