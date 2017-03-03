@@ -39,17 +39,17 @@
 				list = [];
 
 			btn1.onclick = function() {
-				init();
+				list=[];
 				preOrder(tree);
 				show();
 			};
 			btn2.onclick = function() {
-				init();
+				list=[];
 				inOrder(tree);
 				show();
 			};
 			btn3.onclick = function() {
-				init();
+				list=[];
 				postOrder(tree);
 				show();
 			};
@@ -70,18 +70,8 @@
 					}else{
 						clearInterval(si);
 						list[i-1].style.background="#fff";
-						
 					}
 				},500);
-			}
-			/*
-			 * init方法
-			 * 初始化div的背景颜色和list
-			 * 
-			 * */
-			function init(){
-				list=[];
-				
 			}
 			/*
 			 * preOrder方法
