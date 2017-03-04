@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务五：听指令的小方块（二）</title>
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+		}
+		
+		.wrapper {
+			position: relative;
+			width: 568px;
+			margin: 0 auto;
+		}
+		
+		ul {}
+		
+		li {
+			float: left;
+			list-style: none;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		
+		#dom {
+			position: absolute;
+			height: 50px;
+			width: 50px;
+			background: red;
+			transition: all .5s;
+		}
+		
+		#head {
+			position: absolute;
+			height: 10px;
+			width: 100%;
+			background: blue;
+		}
+		
+		button {
+			padding: 5px 10px;
+			margin-top: 5px;
+			margin-left: 40px;
+		}
+	</style>
+
+	<body>
+		<div class="wrapper">
+			<ul id="ul"></ul>
+			<div id="dom" style="left:300px;top:300px;transform:rotate(0deg)">
+				<div id="head"></div>
+			</div>
+			<button id="tunlef">Turn left</button>
+			<button id="tunrig">Turn right</button>
+			<button id="tunbac">Turn back</button>
+			<button id="go">Go!!!</button>
+			<br>
+			<button id="tralef">Tra lef</button>
+			<button id="trarig">Tra rig</button>
+			<button id="tratop">Tra top</button>
+			<button id="trabot">Tra bot</button>
+			<br>
+			<button id="movlef">Mov lef</button>
+			<button id="movrig">Mov rig</button>
+			<button id="movtop">Mov top</button>
+			<button id="movbot">Mov bot</button>
+		</div>
+
+		<script>
+			var ul = document.getElementById("ul"),
+				dom = document.getElementById("dom"),
+				head = document.getElementById("head"),
+				tl = document.getElementById("tunlef"),
+				tr = document.getElementById("tunrig"),
+				tb = document.getElementById("tunbac"),
+				go = document.getElementById("go"),
+				trl = document.getElementById("tralef"),
+				trr = document.getElementById("trarig"),
+				trt = document.getElementById("tratop"),
+				trb = document.getElementById("trabot");
+			var ml = document.getElementById("movlef"),
+				mr = document.getElementById("movrig"),
+				mt = document.getElementById("movtop"),
+				mb = document.getElementById("movbot"),
+				dir = "up";
+			init();
+			tl.onclick = function() {
+				var deg = parseInt(dom.style.transform.substring(7, dom.style.transform.length - 1));
+				dom.style.transform = "rotate(" + (deg - 90) + "deg)";
+			};
+			tr.onclick = function() {
+				var deg = parseInt(dom.style.transform.substring(7, dom.style.transform.length - 1));
+				dom.style.transform = "rotate(" + (deg + 90) + "deg)";
+			};
+			tb.onclick = function() {
+				var deg = parseInt(dom.style.transform.substring(7, dom.style.transform.length - 1));
+				dom.style.transform = "rotate(" + (deg - 180) + "deg)";
+			};
+			go.onclick = function() {
+				var deg = parseInt(dom.style.transform.substring(7, dom.style.transform.length - 1));
+				if((deg + 90) % 360 === 0) {
+					dir = "left";
+				} else if((deg - 90) % 360 === 0) {
+					dir = "right";
+				} else if(deg % 360 === 0) {
+					dir = "up";
+				} else if((deg + 180) % 360 === 0) {
+					dir = "down";
+				}
+				switch(dir) {
+					case "left":
+						if(parseInt(dom.style.left) > 50) {
+							dom.style.left = (parseInt(dom.style.left) - 50) + "px";
+						}
+						break;
+					case "right":
+						if(parseInt(dom.style.left) < 500) {
+							dom.style.left = (parseInt(dom.style.left) + 50) + "px";
+						}
+						break;
+					case "up":
+						if(parseInt(dom.style.top) > 50) {
+							dom.style.top = (parseInt(dom.style.top) - 50) + "px";
+						}
+						break;
+					case "down":
+						if(parseInt(dom.style.top) < 500) {
+							dom.style.top = (parseInt(dom.style.top) + 50) + "px";
+						}
+						break;
+				}
+			};
+			trl.onclick = function() {
+				if(parseInt(dom.style.left) > 50) {
+					dom.style.left = (parseInt(dom.style.left) - 50) + "px";
+				}
+			};
+			trr.onclick = function() {
+				if(parseInt(dom.style.left) < 500) {
+					dom.style.left = (parseInt(dom.style.left) + 50) + "px";
+				}
+			};
+			trt.onclick = function() {
+				if(parseInt(dom.style.top) > 50) {
+					dom.style.top = (parseInt(dom.style.top) - 50) + "px";
+				}
+			};
+			trb.onclick = function() {
+				if(parseInt(dom.style.top) < 500) {
+					dom.style.top = (parseInt(dom.style.top) + 50) + "px";
+				}
+			};
+			ml.onclick = function() {
+				dom.style.transform = "rotate(-90deg)";
+				dir = "left";
+				setTimeout(function() {
+					go.click();
+				}, 500);
+			};
+			mr.onclick = function() {
+				dom.style.transform = "rotate(90deg)";
+				dir = "right";
+				setTimeout(function() {
+					go.click();
+				}, 500);
+			};
+			mt.onclick = function() {
+				dom.style.transform = "rotate(0deg)";
+				dir = "up";
+				setTimeout(function() {
+					go.click();
+				}, 500);
+			};
+			mb.onclick = function() {
+				dom.style.transform = "rotate(180deg)";
+				dir = "down";
+				setTimeout(function() {
+					go.click();
+				}, 500);
+			};
+			/*
+			 * init方法
+			 * 初始化棋盘
+			 * 
+			 * */
+			function init() {
+				for(let i = 0; i < 11; i++) {
+					for(var j = 0; j < 11; j++) {
+						var li = document.createElement("li");
+						if(i === 0 && j === 0) {
+							li.style = "border:1px solid #fff;";
+						} else if(j !== 0 && i === 0) {
+							li.style = "border:1px solid #fff;";
+							li.innerHTML = j;
+						} else if(j === 0 && i !== 0) {
+							li.style = "border:1px solid #fff;";
+							li.innerHTML = i;
+						} else if(i === 1 && j > 0 && j < 10) {
+							li.style = "border-top:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+							if(i === j) {
+								li.style = "border-top:1px solid #333;border-left:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+							}
+						} else if(j === 1 && i > 0 && i < 10) {
+							li.style = "border-left:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+						} else if(i === 10 && j < 10) {
+							li.style = "border-right:1px solid #fff;border-bottom:1px solid #333;";
+							if(j === 1) {
+								li.style = "border-right:1px solid #fff;border-bottom:1px solid #333;border-left:1px solid #333;";
+							}
+						} else if(j == 10 && i < 10) {
+							li.style = "border-bottom:1px solid #fff;border-right:1px solid #333;";
+							if(i === 1) {
+								li.style = "border-bottom:1px solid #fff;border-right:1px solid #333;border-top:1px solid #333;";
+							}
+						} else if(i === 10 & j === 10) {
+							li.style = "border-bottom:1px solid #333;border-right:1px solid #333;";
+						} else {
+							li.style = "border-bottom:1px solid #fff;border-right:1px solid #fff;";
+						}
+						ul.appendChild(li);
+					}
+				}
+				var c = document.createElement("div");
+				c.style = "clear:both;";
+				ul.appendChild(c);
+			}
+		</script>
+	</body>
+
+</html>
