@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务三：表单（三）联动</title>
+		<style>
+			div{
+				display:none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<label id="stu" for="radio1">
+			<input type="radio" name="r" id="radio1">在校生
+		</label>
+		<label id="nstu" for="radio2">
+			<input type="radio" name="r" id="radio2">非在校生
+		</label>
+		<br>
+		<div id="inschool">
+			学校
+			<select id="city">
+				<option>北京</option>
+				<option>上海</option>
+				<option>广州</option>
+				<option>深圳</option>
+			</select>
+			<select id="uni">
+				<option>北京大学1</option>
+				<option>北京大学2</option>
+				<option>北京大学3</option>
+				<option>北京大学4</option>
+			</select>
+		</div>
+		<div id="notinschool">
+			就业单位<input type="text">
+		</div>
+		<script>
+			var stu = document.getElementById("stu"),
+				nstu = document.getElementById("nstu"),
+				is = document.getElementById("inschool")
+				nis = document.getElementById("notinschool"),
+				city = document.getElementById("city"),
+				uni = document.getElementById("uni");
+			stu.onclick = function() {
+				is.style.display="block";
+				nis.style.display="none";
+			}
+			nstu.onclick = function() {
+				nis.style.display="block";
+				is.style.display="none";
+			}
+			city.onchange=function(){
+				for(let i=0;i<uni.length;i++){
+					uni.options[i].innerHTML=this.value+uni.options[i].innerHTML.substring(2);
+				}
+			}
+			stu.click();
+		</script>
+	</body>
+
+</html>

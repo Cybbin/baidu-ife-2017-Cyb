@@ -40,3 +40,4 @@
 
 [任务一：表单（一）单个表单项的检验](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task1.html)  
 [任务二：表单（二）多个表单项的动态校验](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task2.html)  
+[任务三：表单（三）联动](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task3.html)  
