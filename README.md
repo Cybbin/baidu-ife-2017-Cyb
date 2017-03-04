@@ -43,3 +43,4 @@
 [任务三：表单（三）联动](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task3.html)  
 [任务四：听指令的小方块（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task4.html)  
 [任务五：听指令的小方块（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task5.html)  
+[任务六：UI组件之浮出层](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task6.html)  
