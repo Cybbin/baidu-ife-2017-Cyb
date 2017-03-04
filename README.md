@@ -44,3 +44,4 @@
 [任务四：听指令的小方块（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task4.html)  
 [任务五：听指令的小方块（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task5.html)  
 [任务六：UI组件之浮出层](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task6.html)  
+[任务七：UI组件之排序表格](http://cybbin.com/baidu-ife-2017-Cyb/ife_yaoyao/task7.html)  
