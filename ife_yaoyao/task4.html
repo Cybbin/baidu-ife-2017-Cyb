@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务四：听指令的小方块（一）</title>
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+		}
+		
+		.wrapper {
+			position: relative;
+			width: 568px;
+			margin: 0 auto;
+			margin-top: 50px;
+		}
+		
+		ul {}
+		
+		li {
+			float: left;
+			list-style: none;
+			width: 50px;
+			height: 50px;
+			text-align: center;
+			line-height: 50px;
+			border: 1px solid #ccc;
+			box-sizing: border-box;
+		}
+		
+		#dom {
+			position: absolute;
+			height: 50px;
+			width: 50px;
+			background: red;
+			transition:all .5s;
+		}
+		
+		#head {
+			position: absolute;
+			height: 10px;
+			width: 100%;
+			background: blue;
+		}
+		
+		button {
+			padding: 5px 10px;
+			margin-top: 50px;
+			margin-left: 30px;
+		}
+	</style>
+
+	<body>
+		<div class="wrapper">
+			<ul id="ul"></ul>
+			<div id="dom" style="left:300px;top:300px;">
+				<div id="head"></div>
+			</div>
+			<button id="tl">Turn left</button>
+			<button id="tr">Turn right</button>
+			<button id="tu">Turn up</button>
+			<button id="td">Turn down</button>
+			<button id="go">Go!!!</button>
+		</div>
+	</body>
+	<script>
+		var ul = document.getElementById("ul"),
+			dom = document.getElementById("dom"),
+			head = document.getElementById("head"),
+			tl = document.getElementById("tl"),
+			tr = document.getElementById("tr"),
+			tu = document.getElementById("tu"),
+			td = document.getElementById("td"),
+			go = document.getElementById("go"),
+			dir = "up";
+		init();
+		tl.onclick = function() {
+			head.style = "width:10px;height:100%;left:0;";
+			dir = "left";
+		};
+		tr.onclick = function() {
+			head.style = "width:10px;height:100%;right:0;";
+			dir = "right";
+		};
+		tu.onclick = function() {
+			head.style = "width:100%;height:10px;top:0;";
+			dir = "up";
+		};
+		td.onclick = function() {
+			head.style = "width:100%;height:10px;bottom:0;";
+			dir = "down";
+		};
+		go.onclick = function() {
+			switch(dir) {
+				case "left":
+					if(parseInt(dom.style.left) > 50) {
+						dom.style.left = (parseInt(dom.style.left) - 50) + "px";
+					}
+					break;
+				case "right":
+					if(parseInt(dom.style.left) < 500) {
+						dom.style.left = (parseInt(dom.style.left) + 50) + "px";
+					}
+					break;
+				case "up":
+					if(parseInt(dom.style.top) > 50) {
+						dom.style.top = (parseInt(dom.style.top) - 50) + "px";
+					}
+					break;
+				case "down":
+					if(parseInt(dom.style.top) < 500) {
+						dom.style.top = (parseInt(dom.style.top) + 50) + "px";
+					}
+					break;
+			}
+		};
+		/*
+		 * init方法
+		 * 初始化棋盘
+		 * 
+		 * */
+		function init() {
+			for(let i = 0; i < 11; i++) {
+				for(var j = 0; j < 11; j++) {
+					var li = document.createElement("li");
+					if(i === 0 && j === 0) {
+						li.style = "border:1px solid #fff;";
+					} else if(j !== 0 && i === 0) {
+						li.style = "border:1px solid #fff;";
+						li.innerHTML = j;
+					} else if(j === 0 && i !== 0) {
+						li.style = "border:1px solid #fff;";
+						li.innerHTML = i;
+					} else if(i === 1 && j > 0 && j < 10) {
+						li.style = "border-top:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+						if(i === j) {
+							li.style = "border-top:1px solid #333;border-left:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+						}
+					} else if(j === 1 && i > 0 && i < 10) {
+						li.style = "border-left:1px solid #333;border-bottom:1px solid #fff;border-right:1px solid #fff;";
+					} else if(i === 10 && j < 10) {
+						li.style = "border-right:1px solid #fff;border-bottom:1px solid #333;";
+						if(j === 1) {
+							li.style = "border-right:1px solid #fff;border-bottom:1px solid #333;border-left:1px solid #333;";
+						}
+					} else if(j == 10 && i < 10) {
+						li.style = "border-bottom:1px solid #fff;border-right:1px solid #333;";
+						if(i === 1) {
+							li.style = "border-bottom:1px solid #fff;border-right:1px solid #333;border-top:1px solid #333;";
+						}
+					} else if(i === 10 & j === 10) {
+						li.style = "border-bottom:1px solid #333;border-right:1px solid #333;";
+					} else {
+						li.style = "border-bottom:1px solid #fff;border-right:1px solid #fff;";
+					}
+					ul.appendChild(li);
+				}
+			}
+			var c = document.createElement("div");
+			c.style = "clear:both;";
+			ul.appendChild(c);
+		}
+	</script>
+
+</html>
