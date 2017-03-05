@@ -23,6 +23,7 @@
 [任务四：定位和居中问题](http://cybbin.com/baidu-ife-2017-Cyb/ife_xiaowei/task4.html)  
 [任务五：零基础HTML及CSS编码（二）](http://cybbin.com/baidu-ife-2017-Cyb/ife_xiaowei/task5.html)  
 [任务六：通过HTML及CSS模拟报纸排版](http://cybbin.com/baidu-ife-2017-Cyb/ife_xiaowei/task6.html)  
+[任务七：实现常见的技术产品官网的页面架构及样式布局](http://cybbin.com/baidu-ife-2017-Cyb/ife_xiaowei/task7.html)  
 
 # 斌斌学院  
 

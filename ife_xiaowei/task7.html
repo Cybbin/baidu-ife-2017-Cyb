@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>任务七：实现常见的技术产品官网的页面架构及样式布局</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html,
+			body {
+				width: 100%;
+				min-height: 100%;
+			}
+			
+			ul {
+				list-style: none;
+			}
+			
+			li {
+				float: left;
+			}
+			
+			a {
+				text-decoration: none;
+			}
+			
+			.w {
+				min-width: 1280px;
+			}
+			
+			.w .tit {
+				float: left;
+			}
+			
+			.w .tit span {
+				height: 50px;
+				line-height: 50px;
+				font-size: 24px;
+				color: #555;
+				margin-left: 50px;
+			}
+			
+			.w .nav {
+				float: right;
+				margin-right: 50px;
+			}
+			
+			.w .nav li {
+				font-size: 16px;
+				width: 90px;
+				text-align: center;
+				height: 50px;
+				line-height: 50px;
+			}
+			
+			.w .nav a {
+				color: #878789;
+			}
+			
+			.w .nav a:hover {
+				color: #e74d48;
+			}
+			
+			.w .nav .active {
+				border-bottom: 4px solid #e74d48;
+				color: #e74d48;
+			}
+			
+			.w .img-con img {
+				width: 100%;
+				height: 800px;
+				filter: blur(1px);
+			}
+			
+			.w .img-con {
+				position: relative;
+			}
+			
+			.w .img-con .con {
+				position: absolute;
+				height: 400px;
+				top: 50%;
+				margin-top: -200px;
+				left: 100px;
+				color: #fff;
+			}
+			
+			.w .img-con .con .tonl {
+				font-size: 60px;
+			}
+			
+			.w .img-con .con .new {
+				width: 370px;
+				font-size: 26px;
+				padding-left: 10px;
+			}
+			
+			.w .img-con .con .start {
+				background: #e8504f;
+				margin-top: 30px;
+				padding-left: 10px;
+				text-align: center;
+				width: 300px;
+				height: 60px;
+				line-height: 60px;
+				font-size: 30px;
+				color: #fff;
+			}
+			
+			.hover {
+				color: #e74d48;
+			}
+			
+			.w .chara {
+				height: 200px;
+				padding: 30px 10px;
+				background: #f7f7f7;
+			}
+			
+			.w .chara ul {
+				display: inline-block;
+			}
+			
+			.w .chara .item {
+				width: 220px;
+				padding: 0 60px;
+				border-right: 2px solid #ccc;
+				text-align: center;
+			}
+			
+			.w .chara .item:last-child {
+				border-right: none;
+			}
+			
+			.w .chara .item span {
+				font-size: 16px;
+				color: #8f8f8f;
+			}
+			
+			.w .about {
+				background: #ededed;
+				height: 300px;
+				position: relative;
+			}
+			
+			.w .about img {
+				position: absolute;
+				top: 50px;
+				left: 50%;
+				margin-left: -60px;
+				height: 100px;
+				width: 120px;
+			}
+			
+			.w .about span {
+				position: absolute;
+				bottom: 50px;
+				left: 50%;
+				width: 800px;
+				margin-left: -400px;
+				font-size: 54px;
+				color: #9d9d9d;
+			}
+			
+			.w .city {
+				position: relative;
+				height: 300px;
+				overflow: hidden;
+			}
+			
+			.w .city img {
+				position: absolute;
+				filter: blur(6px);
+				z-index: -100;
+			}
+			
+			.w .city .info {
+				text-align: center;
+				color: #fff;
+			}
+			
+			.w .city .info p {
+				margin-top: 30px;
+			}
+			
+			.w .city .info p:first-child {
+				margin-top: 50px;
+				font-size: 28px;
+			}
+			
+			.w .city .info .search select {
+				width: 250px;
+				height: 36px;
+				margin-top: 50px;
+				margin-right: 30px;
+				outline: none;
+				color: #999;
+			}
+			
+			.w .city .info .search option {
+				background: #e3e3e5;
+			}
+			
+			.w .city .info .search button {
+				background: #bf4e48;
+				width: 250px;
+				text-align: center;
+				border: none;
+				outline: none;
+				height: 36px;
+				color: #fff;
+				font-size: 16px;
+			}
+			
+			.w .nw {
+				height: 650px;
+				overflow: hidden;
+				position: relative;
+				display: flex;
+			}
+			
+			.w .nw img {
+				position: absolute;
+				z-index: -10;
+				filter: blur(6px);
+			}
+			
+			.w .nw .left {
+				flex: 2;
+				text-align: center;
+				color: #fff;
+				position: relative;
+			}
+			
+			.w .nw .left .trangle {
+				position: absolute;
+				right: 0px;
+				top: 50%;
+				margin-top: -10px;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent;
+				border-right: 20px solid #fff;
+			}
+			
+			.w .nw .left .p1 {
+				margin-top: 150px;
+				font-size: 50px;
+			}
+			
+			.w .nw .left .p2 {
+				font-size: 160px;
+			}
+			
+			.w .nw .left .p3 {
+				font-size: 26px;
+			}
+			
+			.w .nw .left .p4 {
+				font-size: 26px;
+			}
+			
+			.w .nw .right {
+				flex: 1;
+				height: 650px;
+				background: #fff;
+				text-align: center;
+			}
+			
+			.w .nw .right .item .item-tit {
+				margin-top: 150px;
+				font-size: 24px;
+			}
+			
+			.w .nw .right .item .item-con {
+				margin-top: 20px;
+				padding: 0 80px;
+				color: #aaa;
+				font-size: 12px;
+				line-height: 40px;
+				text-align: left;
+			}
+			
+			.w .nw .right .more {
+				width: 100px;
+				margin: 0 auto;
+				margin-top: 50px;
+				border: 2px solid #e74d48;
+				color: #e74d48;
+				padding: 5px 10px;
+				cursor: pointer;
+			}
+			
+			.w .nw .right .more:hover {
+				background: #e74d48;
+				color: #fff;
+			}
+			
+			.w .nw .right ul {
+				margin: 0 auto;
+				margin-top: 50px;
+				width: 100px;
+			}
+			
+			.w .nw .right li {
+				background: #fff;
+				border-radius: 100%;
+				width: 10px;
+				height: 10px;
+				border: 1px solid #8d8d8d;
+				margin-left: 10px;
+			}
+			
+			.w .nw .right .active {
+				background: #8d8d8d;
+			}
+			
+			.w .aboutnew {
+				display: flex;
+				height: 600px;
+			}
+			
+			.w .aboutnew .col {
+				flex: 1;
+				text-align: center;
+			}
+			
+			.w .aboutnew .col .btn {
+				margin: 0 auto;
+				margin-top: 30px;
+				border: 1px solid;
+				padding: 10px 30px;
+				width: 100px;
+				font-size: 24px;
+				cursor: pointer;
+			}
+			
+			.w .aboutnew .col .p1 {
+				margin-top: 200px;
+				font-size: 40px;
+			}
+			
+			.w .aboutnew .col .p2 {
+				margin-top: 10px;
+				font-size: 20px;
+			}
+			
+			.w .aboutnew .col1 {
+				background: #e8504f;
+				color: #fff;
+			}
+			
+			.w .aboutnew .col1 .btn {
+				border-color: #fff;
+				color: #fff;
+			}
+			
+			.w .aboutnew .col1 .btn:hover {
+				color: #e8504f;
+				background: #fff;
+			}
+			
+			.w .aboutnew .col2 {
+				border-color: #e8504f;
+				color: #e8504f;
+			}
+			
+			.w .aboutnew .col2 .btn {
+				border-color: #e8504f;
+				color: #e8504f;
+			}
+			
+			.w .aboutnew .col2 .btn:hover {
+				color: #fff;
+				background: #e8504f;
+			}
+			
+			.w .aboutnew .col3 {
+				flex: 1;
+				position: relative;
+				overflow: hidden;
+			}
+			
+			.w .aboutnew .col3 img {
+				position: absolute;
+			}
+			
+			.w .aboutnew .col3 .trangle {
+				position: absolute;
+				left: 0px;
+				top: 50%;
+				margin-top: -10px;
+				border-top: 20px solid transparent;
+				border-bottom: 20px solid transparent;
+				border-left: 20px solid #fff;
+			}
+			
+			.w .vol {
+				padding: 100px 0;
+			}
+			
+			.w .vol .tit {
+				text-align: center;
+				float: none;
+				width: 400px;
+				margin: 0 auto;
+				margin-bottom: 100px;
+				position: relative;
+			}
+			
+			.w .vol .tit .p1 {
+				font-size: 24px;
+				color: #555;
+				margin-bottom: 10px;
+			}
+			
+			.w .vol .tit .line {
+				width: 80px;
+				height: 3px;
+				background: #e8504f;
+				position: absolute;
+				left: 50%;
+				margin-left: -40px;
+			}
+			
+			.w .vol .tit .p2 {
+				font-size: 12px;
+				color: #aaa;
+				margin-top: 20px;
+			}
+			
+			.w .vol .con {
+				padding: 0 150px;
+			}
+			
+			.w .vol .con .left {
+				float: left;
+				width: 300px;
+			}
+			
+			.w .vol .con .left .item {
+				margin-bottom: 30px;
+			}
+			
+			.w .vol .con .left .item .t {
+				color: #555;
+				font-size: 14px;
+				margin-bottom: 10px;
+			}
+			
+			.w .vol .con .left .item .c {
+				color: #aaa;
+				font-size: 12px;
+				line-height: 20px;
+			}
+			
+			.w .vol .con .right {
+				float: right;
+				width: 780px;
+			}
+			
+			.w .vol .con .right input {
+				width: 340px;
+				height: 36px;
+				margin-bottom: 20px;
+				margin-right: 20px;
+				border: none;
+				background: #EDEDEF;
+				padding: 0 10px;
+				color: #999;
+				font-size: 12px;
+				outline: none;
+			}
+			
+			.w .vol .con .right .dream {
+				width: 726px;
+				height: 60px;
+			}
+			
+			.w .vol .con .right button {
+				width: 746px;
+				height: 40px;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				font-size: 16px;
+				color: #555;
+			}
+			
+			.w .contact {
+				padding: 100px 0;
+				background: #33363F;
+			}
+			.w .contact .con{
+				width:500px;
+				margin:0 auto;
+			}
+			.w .contact .con p {
+				color: #fff;
+				text-align: center;
+				margin-bottom:10px;
+			}
+			
+			.w .contact .con .p1 {
+				font-size: 24px;
+				margin-bottom:10px;
+			}
+			
+			.w .contact .con .p2 {
+				font-size: 12px;
+				color:#eee;
+				line-height:20px;
+			}
+			.w .contact .con input{
+				width:380px;
+				border:none;
+				margin-right:0;
+				float:left;
+				height:40px;
+				padding:0 10px;
+				color:#aaa;
+				font-size:14px;
+				outline:none;
+			}
+			.w .contact .con button{
+				width:100px;
+				border:none;
+				float:left;
+				height:40px;
+				color:#fff;
+				background:#6F6F77;
+				font-size:18px;
+				outline:none;
+				cursor:pointer;
+			}
+			.w .footer{
+				background:#30303a;
+				height:50px;
+				line-height:50px;
+				font-size:12px;
+				color:#fff;
+			}
+			.w .footer .new{
+				float:left;
+				margin-left:50px;
+			}
+			.w .footer .btt{
+				float:right;
+				margin-right:50px;
+				cursor:pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="w">
+			<div class="tit">
+				<span>新世界</span>
+			</div>
+			<div class="nav">
+				<ul>
+					<a href="#">
+						<li class="active">首页</li>
+					</a>
+					<a href="#">
+						<li>最新活动</li>
+					</a>
+					<a href="#">
+						<li>项目介绍</li>
+					</a>
+					<a href="#">
+						<li>爱心社区</li>
+					</a>
+					<a href="#">
+						<li>关于我们</li>
+					</a>
+					<a href="#">
+						<li class="hover">登录</li>
+					</a>
+				</ul>
+			</div>
+			<div style="clear:both;"></div>
+		</div>
+		<div class="w">
+			<div class="img-con">
+				<img src="img/task7_3.jpg">
+				<div class="con">
+					<p class="tonl">Time of new life</p>
+					<p class="new">新时代,年轻的人们让我们一起体验新生活,享受新生活</p>
+					<a href="#">
+						<div class="start">开始体验</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="w">
+			<div class="chara">
+				<ul>
+					<li class="item">
+						<span>打造全新世界观,让你更爱你的生活</span>
+					</li>
+					<li class="item">
+						<span>丰富多彩的公益活动,发挥新世界的主人公意识</span>
+					</li>
+					<li class="item">
+						<span>时尚的新理念,超前体验未知的生活</span>
+					</li>
+					<li class="item">
+						<span>完善的培养机制,培养你全新的世界观</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="w">
+			<div class="about">
+				<img src="img/task7_2.png">
+				<span>关于新世界,你不知道的还有什么?</span>
+			</div>
+		</div>
+		<div class="w">
+			<div class="city">
+				<img src="img/task7_3.jpg">
+				<div class="info">
+					<p>查找新世界城市活动信息</p>
+					<p>每个城市有不同的活动信息,请自主查询您所需要了解的城市</p>
+					<div class="search">
+						<select>
+							<option>中国</option>
+							<option>日本</option>
+							<option>美国</option>
+							<option>韩国</option>
+						</select>
+						<select>
+							<option>北京市</option>
+							<option>天津市</option>
+							<option>河北省</option>
+							<option>陕西省</option>
+							<option>内蒙古自治区</option>
+							<option>辽宁省</option>
+						</select>
+						<select>
+							<option>北京</option>
+							<option>上海</option>
+							<option>深圳</option>
+							<option>广州</option>
+						</select>
+						<button>搜   索</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="w" style="height:300px;background:#f7f7f7;">
+		</div>
+		<div class="w">
+			<div class="nw">
+				<img src="img/task7_3.jpg">
+				<div class="left">
+					<p class="p1">新世界</p>
+					<p class="p2">TIME</p>
+					<p class="p3">@新世界 - 北京</p>
+					<p class="p4">2016.04.01</p>
+					<div class="trangle"></div>
+				</div>
+				<div class="right">
+					<div class="item">
+						<p class="item-tit item-tit1">新世界/<span class="hover">01</span></p>
+						<p class="item-con item-con1">新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界新世界是个新世界</p>
+					</div>
+					<div class="more">更多详情</div>
+					<ul>
+						<li class="active"></li>
+						<li></li>
+						<li></li>
+					</ul>
+				</div>
+			</div>
+			<div class="aboutnew">
+				<div class="col1 col">
+					<p class="p1">新时代</p>
+					<p class="p2">关于爱生活的我们</p>
+					<p class="p2">________</p>
+					<div class="btn">查看更多</div>
+				</div>
+				<div class="col2 col">
+					<p class="p1">新时代</p>
+					<p class="p2">关于爱生活的我们</p>
+					<p class="p2">________</p>
+					<div class="btn">查看更多</div>
+				</div>
+				<div class="col3">
+					<img src="img/task7_3.jpg">
+					<div class="trangle"></div>
+				</div>
+			</div>
+		</div>
+		<div class="w">
+			<div class="vol">
+				<div class="tit">
+					<p class="p1">成为我们的志愿者</p>
+					<p class="line"></p>
+					<p class="p2">新世界的大家庭需要每一个爱生活的人的加入,如果你够年轻,有梦想,有激情那就不要犹豫,快来加入我们,成为改变所有人生活的人</p>
+				</div>
+				<div class="con">
+					<div class="left">
+						<div class="item">
+							<div class="t">新世界志愿者协议</div>
+							<div class="c">加入新世界志愿者的人员必须遵守中华人民共和国的相关法律法规,并且本着平等自愿的原则...</div>
+						</div>
+						<div class="item">
+							<div class="t">新世界志愿者权利</div>
+							<div class="c">新世界志愿者享受新世界内部所有资源共享的权利,并且享受所在新世界活动的优先参与资格</div>
+						</div>
+						<div class="item">
+							<div class="t">更多条款</div>
+						</div>
+					</div>
+					<div class="right">
+						<input type="text" value="姓名:">
+						<input type="text" value="年龄:">
+						<input type="text" value="联系方式:">
+						<input type="text" value="联系地址:">
+						<input type="text" value="请简单描述您梦想的生活:" class="dream">
+						<button>提交申请</button>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		</div>
+		<div class="w">
+			<div class="contact">
+				<div class="con">
+					<p class="p1">联系我们</p>
+					<p class="p2">为了更好的获取我们最新的产品咨询,您可以留下您的电子邮箱快速订阅我们的产品咨询,也可以通过以下任何方式关注我们动态</p>
+					<input type="text" value="someone@email.com">
+					<button>提交</button>
+				</div>
+			</div>
+			<div class="footer">
+				<span class="new">@2017新世界</span>
+				<span class="btt"><a>Back to top</a></span>
+			</div>
+		</div>
+	</body>
+
+</html>
