@@ -53,7 +53,7 @@
 				is.style.display="none";
 			}
 			city.onchange=function(){
-				for(let i=0;i<uni.length;i++){
+				for(var i=0;i<uni.length;i++){
 					uni.options[i].innerHTML=this.value+uni.options[i].innerHTML.substring(2);
 				}
 			}

@@ -59,19 +59,19 @@
 		<table class="table" cellpadding="0" cellspacing="0">
 			<tr class="head">
 				<td>姓名</td>
-				<td>语文
+				<td id="1">语文
 					<div class="triangle1"></div>
 					<div class="triangle2"></div>
 				</td>
-				<td>数学
+				<td id="2">数学
 					<div class="triangle1"></div>
 					<div class="triangle2"></div>
 				</td>
-				<td>英语
+				<td id="3">英语
 					<div class="triangle1"></div>
 					<div class="triangle2"></div>
 				</td>
-				<td>总分
+				<td id="4">总分
 					<div class="triangle1"></div>
 					<div class="triangle2"></div>
 				</td>
@@ -99,18 +99,18 @@
 			</tr>
 		</table>
 		<script>
-			"use strict"
 			var p = document.getElementsByTagName("tr"),
 				sort = document.getElementsByClassName("head")[0].children;
-			for(let i = 1; i < sort.length; i++) {
-				sort[i].onclick = function() {
-					for(let j = 1; j < p.length - 1; j++) {
-						for(let k = j + 1; k < p.length; k++) {
-							if(parseInt(p[j].children[i].innerHTML)<parseInt(p[k].children[i].innerHTML)){
-								let temp = p[j].innerHTML;
-								p[j].innerHTML=p[k].innerHTML;
-								p[k].innerHTML=temp;
-							}
+			for(var i = 1; i < sort.length; i++) {
+				sort[i].onclick = click;
+			}
+			function click() {
+				for(var j = 1; j < p.length - 1; j++) {
+					for(var k = j + 1; k < p.length; k++) {
+						if(parseInt(p[j].children[this.id].innerHTML) < parseInt(p[k].children[this.id].innerHTML)) {
+							var temp = p[j].innerHTML;
+							p[j].innerHTML = p[k].innerHTML;
+							p[k].innerHTML = temp;
 						}
 					}
 				}
