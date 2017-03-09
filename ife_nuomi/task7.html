@@ -18,37 +18,50 @@
 			.stage_area {
 				position: relative;
 				margin-top: 100px;
-				perspective: 3000px;
-				-webkit-perspective: 3000px;
+				perspective: 800px;
+				-webkit-perspective: 800px;
+				-moz-perspective:800px;
 			}
 			
 			.container {
 				position: absolute;
 				left: 50%;
-				margin-left: -350px;
-				width: 700px;
-				height: 500px;
+				margin-left: -150px;
+				width: 300px;
+				height: 200px;
 				transition: transform 1s;
+				-webkit-transition:transform 1s;
+				-moz-transition:transform 1s;
 				transform-style: preserve-3d;
+				-webkit-transform-style:preserve-3d;
+				-moz-transform-style:preserve-3d;
 			}
 			
 			img {
 				position: absolute;
-				height: 500px;
-				width: 700px;
+				height: 200px;
+				width: 300px;
 			}
 			
 			#img1 {
-				transform: rotateY(0deg) translateZ(640px);
+				transform: rotateY(0deg) translateZ(450px);
+				-webkit-transform: rotateY(0deg) translateZ(450px);
+				-moz-transform: rotateY(0deg) translateZ(450px);
 			}
 			#img2 {
-				transform: rotateY(90deg) translateZ(640px);
+				transform: rotateY(90deg) translateZ(450px);
+				-webkit-transform: rotateY(90deg) translateZ(450px);
+				-moz-transform: rotateY(90deg) translateZ(450px);
 			}
 			#img3 {
-				transform: rotateY(180deg) translateZ(640px);
+				transform: rotateY(180deg) translateZ(450px);
+				-webkit-transform: rotateY(180deg) translateZ(450px);
+				-moz-transform: rotateY(180deg) translateZ(450px);
 			}
 			#img4 {
-				transform: rotateY(270deg) translateZ(640px);
+				transform: rotateY(270deg) translateZ(450px);
+				-webkit-transform: rotateY(270deg) translateZ(450px);
+				-moz-transform: rotateY(270deg) translateZ(450px);
 			}
 		</style>
 	</head>
