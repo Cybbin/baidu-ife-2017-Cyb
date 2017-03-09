@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>CSS3实现3D 轮播图</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html,
+			body {
+				width: 100%;
+			}
+			
+			.stage_area {
+				position: relative;
+				margin-top: 100px;
+				perspective: 3000px;
+				-webkit-perspective: 3000px;
+			}
+			
+			.container {
+				position: absolute;
+				left: 50%;
+				margin-left: -350px;
+				width: 700px;
+				height: 500px;
+				transition: transform 1s;
+				transform-style: preserve-3d;
+			}
+			
+			img {
+				position: absolute;
+				height: 500px;
+				width: 700px;
+			}
+			
+			#img1 {
+				transform: rotateY(0deg) translateZ(640px);
+			}
+			#img2 {
+				transform: rotateY(90deg) translateZ(640px);
+			}
+			#img3 {
+				transform: rotateY(180deg) translateZ(640px);
+			}
+			#img4 {
+				transform: rotateY(270deg) translateZ(640px);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="stage_area">
+			<div class="container" id="con">
+				<img src="img/task7.jpg" id="img1">
+				<img src="img/task7.jpg" id="img2">
+				<img src="img/task7.jpg" id="img3">
+				<img src="img/task7.jpg" id="img4">
+			</div>
+		</div>
+		<script>
+			var con = document.getElementById("con");
+			var deg = 0;
+			setInterval(function() {
+				deg-=90;
+				con.style.transform = "rotateY("+deg+"deg)";
+			}, 2000);
+		</script>
+	</body>
+</html>
