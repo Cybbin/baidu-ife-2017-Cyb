@@ -31,22 +31,16 @@
 			border-radius: 125px;
 			box-sizing:border-box;
 		}
-		.circle:before,.circle:after{
+		.circle:before{
 			position: absolute;
 			content:"";
 			width: 250px;
 			height: 250px;
-			clip: rect(0, 125px, 256px, 0);
+			clip: rect(0px, 218px, 254px, 0px);
 			border:2px solid #ff298c;
-			border-radius: 125px;
-		}
-		.circle:before{
-			transform: rotate(-90deg);
+			border-radius: 100%;
+			transform: rotate(-135deg);
 			-webkit-animation:circle-b-rotate 1.5s infinite linear;
-		}
-		.circle:after{
-			transform: rotate(-180deg);
-			-webkit-animation:circle-a-rotate 1.5s infinite linear;
 		}
 		.sector {
 			position: absolute;
