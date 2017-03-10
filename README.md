@@ -15,6 +15,7 @@
 [CSS3饼状loading效果](http://cybbin.com/baidu-ife-2017-Cyb/ife_nuomi/task5.html)  
 [使用CSS实现折叠面板](http://cybbin.com/baidu-ife-2017-Cyb/ife_nuomi/task6.html)  
 [CSS3实现3D 轮播图](http://cybbin.com/baidu-ife-2017-Cyb/ife_nuomi/task7.html)
+[动态数据绑定（一）](http://cybbin.com/baidu-ife-2017-Cyb/ife_nuomi/task8.html)
 
 # 小薇学院  
 
