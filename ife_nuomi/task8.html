@@ -19,9 +19,6 @@
 				for(let i in obj){
 					if(obj.hasOwnProperty(i)){
 						val=obj[i];
-						if(typeof val === 'object'){
-							new Observer(val);
-						}
 						this.convert(i,val);
 					}
 				}
@@ -55,6 +52,7 @@
 			
 			let app = new Observer(data);
 		</script>
+		不考虑数组
 	</body>
 
 </html>
