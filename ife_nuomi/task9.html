@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>动态数据绑定（二）</title>
+	</head>
+
+	<body>
+		<script>
+			function Observer(data) {
+				this.data = data;
+				this.walk(data);
+			}
+			var p = Observer.prototype;
+			
+			p.walk=function(obj){
+				let val;
+				for(let key in obj){
+					if(obj.hasOwnProperty(key)){
+						val=obj[key];
+						if(typeof val === 'object'){
+							new Observer(val);
+						}
+						this.convert(key,val);
+					}
+				}
+			};
+			
+			p.convert=function(key,val){
+				Object.defineProperty(this.data,key,{
+					enumerable:true,
+					configurable:true,
+					get:function(){
+						console.log("你访问了 "+key);
+						return val;
+					},
+					set:function(newVal){
+						console.log("你设置了 "+key);
+						console.log("新的"+key+"被设置为"+newVal);
+						val=newVal;
+					}
+				});
+			};
+			
+			let data = {
+				user:{
+					name:"chenyibin",
+					age:21
+				},
+				address:{
+					city:"shenzhen"
+				}
+			};
+			
+			let app = new Observer(data);
+		</script>
+		考虑数组，但是重新定义data时无法显示
+	</body>
+
+</html>
