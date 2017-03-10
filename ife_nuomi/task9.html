@@ -13,46 +13,48 @@
 				this.walk(data);
 			}
 			var p = Observer.prototype;
-			
-			p.walk=function(obj){
+
+			p.walk = function(obj) {
 				let val;
-				for(let key in obj){
-					if(obj.hasOwnProperty(key)){
-						val=obj[key];
-						if(typeof val === 'object'){
+				for(let key in obj) {
+					if(obj.hasOwnProperty(key)) {
+						val = obj[key];
+						if(typeof val === 'object') {
 							new Observer(val);
 						}
-						this.convert(key,val);
+						this.convert(key, val);
 					}
 				}
 			};
-			
-			p.convert=function(key,val){
-				Object.defineProperty(this.data,key,{
-					enumerable:true,
-					configurable:true,
-					get:function(){
-						console.log("你访问了 "+key);
+
+			p.convert = function(key, val) {
+				Object.defineProperty(this.data, key, {
+					enumerable: true,
+					configurable: true,
+					get: function() {
+						console.log("你访问了 " + key);
 						return val;
 					},
-					set:function(newVal){
-						console.log("你设置了 "+key);
-						console.log("新的"+key+"被设置为"+newVal);
-						val=newVal;
+					set: function(newVal) {
+						if(key === "age") {
+							console.log("我的年纪变了，现在已经是" + newVal + "岁了");
+						} else {
+							console.log("你设置了 " + key);
+							console.log("新的" + key + "被设置为" + newVal);
+						}
+						val = newVal;
 					}
 				});
 			};
-			
+
 			let data = {
-				user:{
-					name:"chenyibin",
-					age:21
+				name: {
+					firstName: "yibin",
+					lastName: "chen"
 				},
-				address:{
-					city:"shenzhen"
-				}
+				age: 21
 			};
-			
+
 			let app = new Observer(data);
 		</script>
 		考虑数组，但是重新定义data时无法显示
