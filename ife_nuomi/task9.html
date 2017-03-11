@@ -11,6 +11,7 @@
 			function Observer(data) {
 				this.data = data;
 				this.walk(data);
+				this.eventsBus = new Event();
 			}
 			var p = Observer.prototype;
 
@@ -28,7 +29,8 @@
 			};
 
 			p.convert = function(key, val) {
-				Object.defineProperty(this.data, key, {
+				let _this = this;
+				Object.defineProperty(_this.data, key, {
 					enumerable: true,
 					configurable: true,
 					get: function() {
@@ -36,17 +38,41 @@
 						return val;
 					},
 					set: function(newVal) {
-						if(key === "age") {
-							console.log("我的年纪变了，现在已经是" + newVal + "岁了");
-						} else {
-							console.log("你设置了 " + key);
-							console.log("新的" + key + "被设置为" + newVal);
-						}
+						console.log("你设置了 " + key);
+						console.log("新的" + key + "被设置为" + newVal);
+						_this.eventsBus.emit(key,val,newVal);
 						val = newVal;
+						if(typeof newVal === "object") {
+							new Observer(newVal);
+						}
 					}
 				});
 			};
-
+			
+			p.$watch = function(key,callback){
+				this.eventsBus.on(key,callback);
+			}
+			
+			
+			function Event() {
+				this.events = {};
+			}
+			
+			let e = Event.prototype;
+			
+			e.on = function(key, callback) {
+				if(this.events[key]) {
+					this.events[key].push(callback);
+				} else {
+					this.events[key] = [callback];
+				}
+			}
+			e.emit = function(key, ...arg){
+				this.events[key] && this.events[key].forEach(function(item){
+					item(...arg);
+				})
+			}
+			
 			let data = {
 				name: {
 					firstName: "yibin",
@@ -56,6 +82,9 @@
 			};
 
 			let app = new Observer(data);
+			app.$watch("age",function(oldVal,newVal){
+				console.log("我的年龄变了，原来是"+oldVal+"岁，现在是"+newVal+"岁");
+			});
 		</script>
 		考虑数组，但是重新定义data时无法显示
 	</body>
