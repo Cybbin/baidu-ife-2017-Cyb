@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>仿豆瓣音乐播放器</title>
+		<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<style>
+			*{
+				margin:0;
+				padding:0;
+			}
+			html,body{
+				width:100%;
+			}
+			.container{
+				margin:0 auto;
+				height:250px;
+				width:700px;
+				background:#FAFAFA;
+				margin-top:200px;
+			}
+			.container .left{
+				float:left;
+				padding:20px;
+			}
+			.container .left .songName{
+				font-size:26px;
+				color:#303030;
+			}
+			.container .left .singer{
+				margin-top:10px;
+				font-size:16px;
+				color:#4A4A4A;
+			}
+			.container .left .controls{
+				
+			}
+			.container .left .controls .menu{
+				position:relative;
+				height:30px;
+			}
+			.container .left .controls .menu .time{
+				float:left;
+				line-height:35px;
+				font-size:12px;
+				color:#aaa;
+			}
+			.container .left .controls .menu .sound{
+				float:left;
+				font-size:14px;
+				color:#aaa;
+				line-height:30px;
+				margin-left:10px;
+				margin-right:3px;
+			}
+			.container .left .controls .menu .chunk{
+				display:inline-block;
+				height:18px;
+				width:50px;
+				margin-top:6px;
+				cursor:pointer;
+			}
+			.container .left .controls .menu .chunk .volume{
+				position:absolute;
+				width:50px;
+				height:2px;
+				background-color:#aaa;
+				top:50%;
+			}
+			.container .left .controls .menu .chunk .volume .current-volume{
+				position:absolute;
+				top:0;
+				left:0;
+				height:2px;
+				width:25px;
+				background-color:#333;
+			}
+			.container .left .controls .menu .download{
+				float:right;
+				color:#aaa;
+				line-height:30px;
+				font-size:20px;
+				margin-left:20px;
+			}
+			.container .left .controls .menu .share{
+				float:right;
+				color:#aaa;
+				line-height:30px;
+				margin-left:20px;
+				font-size:20px;
+			}
+			.container .left .controls .menu .loop{
+				float:right;
+				color:#aaa;
+				line-height:30px;
+				margin-left:20px;
+				font-size:20px;
+				margin-left:20px;
+				
+			}
+			.container .left .controls .menu .order{
+				float:right;
+				color:#aaa;
+				line-height:30px;
+				margin-left:20px;
+				font-size:20px;
+				margin-left:20px;
+			}
+			.container .left .controls .menu .pointer:hover{
+				color:#666;
+				cursor:pointer;
+			}
+			.container .left .controls .chunk-process{
+				position:relative;
+				width:400px;
+				height:16px;
+				cursor:pointer;
+			}
+			.container .left .controls .chunk-process .rdy{
+				position:relative;
+				top:7px;
+				width:400px;
+				height:2px;
+				background-color:#ccc;
+			}
+			.container .left .controls .chunk-process .rdy .process{
+				position:absolute;
+				height:2px;
+				width:0px;
+				top:0;
+				left:0;
+				background-color:#6bbd7a;
+			}
+			.container .left .button{
+				margin-top:30px;
+				font-size:30px;
+			}
+			.container .left .button .glyphicon{
+				color:#4A4A4A;
+				cursor:pointer;
+			}
+			.container .left .button .gray{
+				color:#4A4A4A;
+			}
+			.container .left .button .red{
+				color:#FF2C56;
+			}
+			.container .left .button .glyphicon-heart,.glyphicon-trash{
+				margin-right:30px;
+			}
+			.container .left .button .glyphicon-play,.glyphicon-pause,.glyphicon-step-forward{
+				float:right;
+				margin-left:30px;
+			}
+			.container .right{
+				float:right;
+				padding:20px;
+			}
+			.container .right img{
+				width:186px;
+				height:186px;
+				background:url(img/task4.png) no-repeat;
+				border-radius:100%;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<div class="left">
+				<p class="songName" id="song"></p>
+				<p class="singer" id="singer"></p>
+				<div class="controls">
+					<div class="menu">
+						<span class="time" id="time"></span>
+						<span class="sound glyphicon glyphicon-volume-up pointer"></span>
+						<div class="chunk" id="chunk">
+							<div class="volume">
+								<div class="current-volume" id="current-volume"></div>
+							</div>
+						</div>
+						<span class="share glyphicon glyphicon-share pointer"></span>
+						<span class="download glyphicon glyphicon-download pointer"></span>
+						<span class="glyphicon glyphicon-repeat loop pointer" id="loop"></span>
+						<span class="glyphicon glyphicon-refresh order pointer" id="order"></span>
+					</div>
+					<div class="chunk-process" id="chunk-process">
+						<div class="rdy" id="rdy">
+							<div class="process" id="process"></div>
+						</div>
+					</div>
+				</div>
+				<div class="button">
+					<span class="glyphicon glyphicon-heart gray" id="heart"></span>
+					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-step-forward" id="next"></span>
+					<span class="glyphicon glyphicon-play" id="play"></span>
+					<span class="glyphicon glyphicon-pause" id="pause"></span>
+				</div>
+			</div>
+			<div class="right">
+				<img id="img"/>
+			</div>
+			<audio id="audio"></audio>
+		</div>
+		
+		<script>
+			// 定义所有组件
+			var cyb = {
+				audio:null,
+				song:null,
+				singer:null,
+				time:null,
+				chunk:null,
+				curvolnume:null,
+				loop:null,
+				order:null,
+				rdy:null,
+				process:null,
+				chunkProcess:null,
+				btnPlay:null,
+				btnPause:null,
+				btnNext:null,
+				btnHeart:null,
+				img:null,
+				playlist:null,
+				currentIndex:0,
+				currentTime:null,
+				currentSong:null,
+			};
+			// 初始化
+			cyb.init=function(){
+				cyb.initData();
+				cyb.updataSong();
+				cyb.setInterval();
+				cyb.addEventListener();
+			};
+			// 初始化数据
+			cyb.initData=function(){
+				cyb.audio=$('#audio').get(0);
+				cyb.song=$('#song');
+				cyb.singer=$('#singer');
+				cyb.time=$('#time');
+				cyb.chunk=$('#chunk');
+				cyb.chunkProcess=$('#chunk-process'),
+				cyb.curvolume=$('#current-volume'),
+				cyb.loop=$('#loop');
+				cyb.order=$('#order');
+				cyb.rdy=$('#rdy');
+				cyb.process=$('#process'),
+				cyb.btnPlay=$('#play');
+				cyb.btnPause=$('#pause');
+				cyb.btnNext=$('#next');
+				cyb.btnHeart=$('#heart');
+				cyb.img=$('#img');
+				
+				cyb.audio.volume=0.5;
+				cyb.listLoop();
+			};
+			// 更新歌曲
+			cyb.updataSong=function(){
+				cyb.currentSong=cyb.playlist[cyb.currentIndex];
+				cyb.song.text(cyb.currentSong.name);
+				cyb.singer.text(cyb.currentSong.artists[0].name);
+				cyb.audio.src=cyb.currentSong.mp3Url;
+				cyb.img.attr('src',cyb.currentSong.album.picUrl);
+				cyb.updataProcess();
+			};
+			// 实时更新时间和进度条
+			cyb.setInterval=function(){
+				cyb.updataProcess();
+				setInterval(cyb.updataProcess,1000);
+			};
+			// 添加监听事件
+			cyb.addEventListener=function(){
+				// audio可以播放后点击开始按钮
+				cyb.audio.addEventListener('canplay',function(){
+					cyb.play();
+				});
+				// audio结束后下一曲
+				cyb.audio.addEventListener('ended',function(){
+					cyb.next();
+				});
+				// 开始按钮点击
+				cyb.btnPlay.click(cyb.play);
+				// 暂停按钮点击
+				cyb.btnPause.click(cyb.pause);
+				// 下一首按钮点击
+				cyb.btnNext.click(cyb.next);
+				// 喜欢按钮点击
+				cyb.btnHeart.click(function(){
+					if(cyb.btnHeart.hasClass('gray')){
+						cyb.btnHeart.removeClass('gray');
+						cyb.btnHeart.addClass('red');
+					}else{
+						cyb.btnHeart.addClass('gray');
+						cyb.btnHeart.removeClass('red');
+					}
+				});
+				// 调节音量
+				cyb.chunk.click(cyb.updataVolume);
+				// 快进
+				cyb.chunkProcess.click(cyb.forward);
+				// 单曲循环
+				cyb.loop.click(cyb.singleLoop);
+				// 列表循环
+				cyb.order.click(cyb.listLoop);
+			};
+			// 下一曲
+			cyb.next=function(){
+				cyb.currentIndex=cyb.currentIndex<cyb.playlist.length-1?cyb.currentIndex+1:0;
+				cyb.updataSong();
+			};
+			// 播放
+			cyb.play=function(){
+				cyb.btnPlay.hide();
+				cyb.btnPause.show();
+				cyb.audio.play();
+			};
+			// 暂停
+			cyb.pause=function(){
+				cyb.btnPlay.show();
+				cyb.btnPause.hide();
+				cyb.audio.pause();
+			};
+			// 更新时间和进度条
+			cyb.updataProcess=function(){
+				var duration = cyb.currentSong.duration/1000;
+				var current = cyb.audio.currentTime;
+				var left = duration-current;
+				// 更新时间
+				var second = parseInt(left%60);
+				var minute = parseInt(left/60);
+				if(minute<10) minute='0'+minute;
+				if(second<10) second='0'+second;
+				cyb.time.text('-'+minute+':'+second);
+				// 更新进度条
+				cyb.process.width((current/duration)*cyb.rdy.width()+'px');
+			};
+			// 更新音量
+			cyb.updataVolume=function(e){
+				e= e.originalEvent;
+				var moveX = e.clientX-cyb.chunk.offset().left;
+				cyb.curvolume.width(moveX);
+				cyb.audio.volume=moveX/cyb.chunk.width();
+			};
+			// 快进后更新进度条
+			cyb.forward=function(e){
+				e= e.originalEvent;
+				var moveX = e.clientX-cyb.chunkProcess.offset().left;
+				var duration = cyb.audio.duration;
+				cyb.process.width(moveX);
+				cyb.audio.currentTime=(moveX/cyb.chunkProcess.width())*duration;
+				cyb.updataProcess();
+			};
+			// 单曲循环
+			cyb.singleLoop=function(){
+				cyb.loop.hide();
+				cyb.order.show();
+				cyb.audio.loop=false;
+			};
+			// 列表循环
+			cyb.listLoop=function(){
+				cyb.loop.show();
+				cyb.order.hide();
+				cyb.audio.loop=true;
+			};
+			$(document).ready(function(){
+				// 获取本地json文件
+				$.ajax({
+					url:'json/playlist1.json',
+					type:'GET',
+					dataType:'json',
+					success:function(data){
+						cyb.playlist=data.result.tracks;
+						console.log(cyb.playlist[0]);
+						cyb.init();
+					},
+					error:function(err){
+						console.log("error");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
